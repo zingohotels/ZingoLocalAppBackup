@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LocalApp.iml" filepath="$PROJECT_DIR$/LocalApp.iml" />
+      <module fileurl="file://D:/github/LocalApp/LocalApp.iml" filepath="D:/github/LocalApp/LocalApp.iml" />
+      <module fileurl="file://E:/Bharamu/github/LocalApp/LocalAppss.iml" filepath="E:/Bharamu/github/LocalApp/LocalAppss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZingoLocalAppBackupLocal.iml" filepath="$PROJECT_DIR$/ZingoLocalAppBackupLocal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:/github/LocalApp/app/app.iml" filepath="D:/github/LocalApp/app/app.iml" />
+    </modules>
+  </component>
+</project>
