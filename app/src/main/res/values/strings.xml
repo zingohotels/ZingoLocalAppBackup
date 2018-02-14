@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">LocalApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Zingo Hotels</string>
+    <string name="phone_number_validation_message">Enter Valid 10 Digit Mobile No</string>
+    <string name="first_name_validation_message">Please Enter Your First Name</string>
+    <string name="last_name_validation_message">Please Enter Your Last Name</string>
+    <string name="gender_validation_message">Please Select Your Gender</string>
+    <string name="unique_name_validation_message">Please Enter Your User Name</string>
+    <string name="email_validation_message">Please Enter Valid Email Id</string>
+    <string name="phone_validation_message">Please Enter Valid Phone Number</string>
+    <string name="loader_message">Please wait...</string>
+    <string name="registration_text">Please fill the required fields. * fields are Mandatory</string>
+    <string name="submit">Submit</string>
+    <string name="empty_description">No description available.</string>
+    <string name="login">Log in</string>
+    <string name="create_login">Sign up</string>
+    <string name="_login">Sign in</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="user">User name/email</string>
+    <string name="password">Password</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="sign_up_title">Join Us</string>
+    <string name="sign_up_sub_title">Be Local and See the world from local eyes</string>
+    <string name="interest">What do you want to do? \n Choose your interest.</string>
+
+    <array name="banner_images">
+        <item>@drawable/water_sports</item>
+        <item>@drawable/holiday_packages</item>
+        <item>@drawable/eat_and_drink</item>
+        <item>@drawable/culture</item>
+        <item>@drawable/health_wellnes</item>
+        <item>@drawable/events</item>
+        <item>@drawable/arts</item>
+    </array>
+
+    <array name="categories">
+        <item>Sports</item>
+        <item>Holiday Packages</item>
+        <item>Food</item>
+        <item>Culture</item>
+        <item>Health and Fitness</item>
+        <item>Events</item>
+        <item>Arts</item>
+    </array>
+    <array name="no_of_experience">
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+        <item>1 Experince</item>
+    </array>
+
+    <string name="ColonnaMT">ColonnaMT</string>
+    <string name="Leprosy">Leprosy</string>
+    <string name="BomBardment">bombardment_shadow</string>
+    <string name="mina">Mina_is_gone_3D</string>
+    <string name="Yeysk">Yeysk</string>
+    <string name="Maribel_Suit">Maribel_Suit</string>
+
+    <array name="activity_image">
+        <item>@drawable/nightlife</item>
+        <item>@drawable/once_in_a_lifetime</item>
+        <item>@drawable/family_fun</item>
+        <item>@drawable/history</item>
+        <item>@drawable/water_sports</item>
+    </array>
+
+    <string name="about_activity">We are 100% italian foodlovers and co-founders of the company LovexFood in Lastra a Signa ,Florence.We’ve been cooking since childhood with our grandmothers, and our passion for Italian cuisine has only intensified over the years. We love to share Italian family wisdom with other food enthusiasts.</string>
+
+    <!--Error messages-->
+    <string name="phone_number_error">Please Enter Valid Phone Number</string>
+
+    <array name="navbar_items">
+        <!--<item>Home</item>-->
+        <item>Profile</item>
+        <item>Wallet</item>
+        <item>Share App</item>
+        <item>About Zingo</item>
+        <item>Logout</item>
+    </array>
+
+
+</resources>

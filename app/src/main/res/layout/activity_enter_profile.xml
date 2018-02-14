@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.EnterProfileActivity">
+    <com.dd.processbutton.FlatButton
+        android:id="@+id/submit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:layout_gravity="bottom"
+        android:text="@string/submit"
+        android:textColor="@android:color/white"
+        app:pb_colorNormal="@android:color/holo_red_light"
+        app:pb_colorPressed="@android:color/holo_red_dark" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/submit">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/registration_text"
+            android:layout_margin="@dimen/registration_text_margin"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textCapWords"
+                android:hint="Enter First Name*"
+                android:background="@drawable/spinner_background"
+                android:drawableLeft="@drawable/first_name_icon"
+                android:paddingLeft="5dp"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+            <!-- <RelativeLayout
+                                  android:layout_width="fill_parent"
+                                  android:layout_height="fill_parent">
+
+                                  <TextView
+                                      android:id="@+id/textView"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_alignParentTop="true"
+                                      android:textStyle="bold"/>
+
+                                  <TextView
+                                      android:id="@+id/textView2"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_below="@+id/textView"
+                                      android:layout_marginTop="10dp"/>
+                              </RelativeLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Middle Name"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/middle_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textCapSentences"
+                android:hint="Enter Middle Name"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/spinner_background"
+                android:drawableLeft="@drawable/icons_m"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/spinner_background"
+
+                android:drawableLeft="@drawable/icons_l"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:hint="Enter Last Name"
+                android:inputType="textCapWords" />
+
+        </LinearLayout>
+
+
+            <!--<EditText
+                android:id="@+id/user_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:hint="Enter Gender"
+                android:inputType="textCapWords" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        />
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:gravity="center"
+
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                        android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                        >
+
+                        <RadioButton
+                            android:id="@+id/profile_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/one_costomer">
+
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/profile_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/female_user"/>
+                        <RadioButton
+                            android:id="@+id/profile_transgender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/transgender_user"/>
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+
+                android:drawableLeft="@drawable/unique_user"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:hint="Enter User Name*"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email Id"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/email_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/spinner_background"
+                    android:inputType="textEmailAddress"
+                    android:hint="Enter Valid Email Id*"
+                    android:drawableLeft="@drawable/icons_email"
+                    android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                    android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                    />
+               <!-- <TextView
+                    android:id="@+id/verify_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                    android:hint="@string/registration_varify"
+                    android:layout_gravity="center_vertical|right"/>-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+
+
+                <EditText
+                    android:id="@+id/phone_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/spinner_background"
+                    android:inputType="phone"
+                    android:hint="Enter 10 Digit Mobile No*"
+                    android:drawableLeft="@drawable/icons_phone"
+                    android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                    android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                    />
+
+                <!--<TextView
+                    android:id="@+id/verify_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                    android:hint="@string/registration_varify"
+                    android:layout_gravity="center_vertical|right"/>-->
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/spinner_background"
+                android:inputType="text"
+                android:hint="Enter Place"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/icons_city"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+    </LinearLayout>
+
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/spinner_background"
+                    android:inputType="textPostalAddress"
+                    android:hint="Enter Addresss"
+                    android:drawableLeft="@drawable/icons_home_address"
+                    android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                    android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pin Code"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/pin_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/spinner_background"
+                    android:inputType="number"
+                    android:hint="Enter Pin Code"
+                    android:drawableLeft="@drawable/icons_pin"
+                    android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                    android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:layout_weight="2"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/spinner_background"
+                    android:inputType="textPassword"
+                    android:hint="Enter Password"
+                    android:drawableLeft="@drawable/icons_password"
+                    android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                    android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                    android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+            </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Re-Enter Password"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/spinner_background"
+                android:inputType="textPassword"
+                android:hint="Re-Enter Password"
+                android:drawableLeft="@drawable/icons_password"
+                android:drawablePadding="@dimen/registration_padding_drawable_margin"
+                android:layout_marginLeft="@dimen/registration_edit_horizontal_margin"
+                android:layout_marginRight="@dimen/registration_edit_horizontal_margin"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

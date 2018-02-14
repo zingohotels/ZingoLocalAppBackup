@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomFontTextView">
+        <attr name="fontName" />
+    </declare-styleable>
+    
+    <attr name="fontName" format="enum">
+        <enum name="ColonnaMT" value="1" />
+        <enum name="Leprosy" value="2"/>
+        <enum name="bombardment_shadow" value="3" />
+        <enum name="Mina_is_gone_3D" value="4" />
+        <enum name="Maribel_Suit" value="5"></enum>
+
+        <!--<enum name="ostrich_regular" value="7" />
+        <enum name="Leprosy" value="2" />
+        <enum name="bombardment_shadow" value="3" />
+        <enum name="Mina_is_gone_3D" value="3" />
+        <!-<enum name="ColonnaMT" value="7" />
+        <enum name="OstrichSans_Heavy" value="8" />
+        <enum name="OstrichSans_Light" value="9" />
+        <enum name="OstrichSans_Medium" value="10" />
+        <enum name="OstrichSans_Bold" value="6" />
+        <enum name="Roboto_Thin" value="11" />
+        <enum name="Roboto_Thin" value="12" />
+        <enum name="Roboto_Thin" value="13" />-->
+    </attr>
+
+    <declare-styleable name="custom_edittext">
+        <attr name="editfontName"/>
+    </declare-styleable>
+    <attr name="editfontName" format="enum">
+        <enum name="Yeysk" value="1"></enum>
+        <enum name="Maribel_Suit" value="2"></enum>
+    </attr>
+
+        <declare-styleable name="ExpandableTextView">
+            <attr name="etw_maxLines" format="integer"/>
+        </declare-styleable>
+</resources>

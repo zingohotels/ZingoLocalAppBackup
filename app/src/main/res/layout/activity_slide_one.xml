@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/slide_four"
+    tools:context="localapp.zingohotels.com.localapp.Activty.SlideOne">
+
+    <localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:text="Join us and Be Local and See The World from Local Eyes"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+
+
+
+</RelativeLayout>
