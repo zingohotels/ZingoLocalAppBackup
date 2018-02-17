@@ -47,9 +47,12 @@ public class CustomTextViewOfOTF extends AppCompatTextView {
                 case 4:
                     fontName = R.string.mina;
                     break;*/
-            case 1:
+            case 8:
                 fontName = R.string.Yeysk;
                 break;
+                case 5:
+                    fontName = R.string.Maribel_Suit;
+                    break;
             /*default:
                 fontName = R.string.Yeysk;
                 break;*/

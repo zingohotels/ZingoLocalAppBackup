@@ -73,6 +73,27 @@ public class PreferenceHandler {
     {
         return sh.getString(Constants.USER_PHONE,"");
     }
+
+
+    public String getUserPrefix()
+    {
+        return sh.getString(Constants.USER_PREFIX,"");
+    }
+    public void setUserPrefix(String prefix)
+    {
+        sh.edit().putString(Constants.USER_PREFIX,prefix).apply();
+    }
+
+    public String getUserSex()
+    {
+        return sh.getString(Constants.USER_SEX,"");
+    }
+    public void setUserSex(String approved)
+    {
+        sh.edit().putString(Constants.USER_SEX,approved).apply();
+    }
+
+
     public void clear(){
         sh.edit().clear().apply();
 

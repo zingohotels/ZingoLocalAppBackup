@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import localapp.zingohotels.com.localapp.Activty.ActivityBook;
 import localapp.zingohotels.com.localapp.Activty.PackageDetailsActivity;
+import localapp.zingohotels.com.localapp.Model.ActivityModel;
 import localapp.zingohotels.com.localapp.Model.PackageDetails;
 import localapp.zingohotels.com.localapp.R;
 import localapp.zingohotels.com.localapp.Util.Constants;
@@ -25,11 +27,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
     private Context context;
     private ArrayList<PackageDetails> packageDetails;
+    private ActivityModel activityModel;
 
-    public PackageAdapter(Context context, ArrayList<PackageDetails> packageDetails)
+    public PackageAdapter(Context context, ActivityModel activityModel)
     {
         this.context = context;
-        this.packageDetails = packageDetails;
+        this.activityModel = activityModel;
+        this.packageDetails = activityModel.getPackageDetails();
     }
 
 
@@ -59,6 +63,19 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
                 Intent intent = new Intent(context, PackageDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.PACKAGE_DESCRIPTION,packageDetails.get(position));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.mBookPakage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //System.out.println("Package = "+packageDetails.get(position).getName());
+                Intent intent = new Intent(context, ActivityBook.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.ACTIVIT_PACKAGE,packageDetails.get(position));
+                bundle.putSerializable(Constants.ACTIVIT_BOOKING,activityModel);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

@@ -156,7 +156,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -180,7 +180,7 @@
                             android:textColor="#455A64" />
 
 
-                    </LinearLayout>
+                    </LinearLayout>-->
                 </LinearLayout>
 
                 <View
@@ -268,7 +268,7 @@
                     android:layout_marginTop="5dp"
                     android:background="#455A64" />
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -308,7 +308,7 @@
                         android:textColor="#455A64" />
 
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -689,7 +689,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Payment Details"
+                        android:text="Payment Mode"
                         android:textColor="#66BB6A" />
 
 
@@ -698,43 +698,45 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#66BB6A"
+
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:orientation="vertical">
 
                     <RadioGroup
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
+                        android:layout_height="50dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:background="#66BB6A"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical|center_horizontal"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/booking_cards"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/booking_cash_pay"
+                            android:layout_width="100dp"
                             android:padding="5dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/radio_btn_selector"
                             android:button="@drawable/editext_border"
                             android:gravity="center"
-                            android:text="Cards"
+                            android:text="Cash"
                             android:textColor="@drawable/rbtn_textcolor_selector"
                             android:textSize="16sp" />
 
                         <RadioButton
-                            android:id="@+id/booking_net_banking"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/booking_online_pay"
+                            android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/radio_btn_selector"
                             android:button="@drawable/editext_border"
                             android:gravity="center"
-                            android:text="Net Banking"
+                            android:text="On line"
                             android:padding="5dp"
                             android:textColor="@drawable/rbtn_textcolor_selector"
                             android:textSize="16sp" />
 
-                        <RadioButton
+                        <!--<RadioButton
                             android:id="@+id/booking_upi"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -744,10 +746,10 @@
                             android:text="UPI"
                             android:padding="5dp"
                             android:textColor="@drawable/rbtn_textcolor_selector"
-                            android:textSize="16sp" />
+                            android:textSize="16sp" />-->
                     </RadioGroup>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -793,7 +795,7 @@
                             android:textColor="#fff"
                             android:textColorHint="#eae8e8"
                             app:editfontName="Maribel_Suit" />
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -832,6 +834,7 @@
 
                         <Button
                             android:layout_margin="15dp"
+                            android:id="@+id/payment_btn"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:text="Pay Amount"

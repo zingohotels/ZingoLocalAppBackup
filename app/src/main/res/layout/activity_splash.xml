@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>-->
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/splash_screen_crop"
@@ -69,6 +69,66 @@
             android:layout_marginBottom="10dp"
             android:layout_alignParentBottom="true" >
             </localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView>
+    </RelativeLayout>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pink"
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Version 1.0"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:id="@+id/textView2" />
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/zingo_local_logo"/>
+        <!--<localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView
+            android:id="@+id/sub_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Zingo Local"
+            android:enabled="false"
+            android:textColor="#ffffff"
+            app:fontName="arial"
+            android:gravity="center"
+            android:textSize="40dp"
+            android:textStyle="normal"
+            android:layout_marginBottom="50dp"
+            android:layout_alignParentBottom="true" >
+            </localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView>-->
+
+        <!--<localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView
+            android:id="@+id/left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignEnd="@+id/textView2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_gravity="end"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginRight="64dp"
+            android:text="... Be Local"
+            android:textColor="#ffffff"
+            android:textSize="28dp"
+            android:textStyle="normal"
+            app:fontName="Mistral">
+
+        </localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView>-->
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

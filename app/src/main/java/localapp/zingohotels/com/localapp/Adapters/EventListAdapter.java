@@ -12,10 +12,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import localapp.zingohotels.com.localapp.Activty.ActivityDetail;
+import localapp.zingohotels.com.localapp.CustomImplementations.SortPackageDetails;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
+import localapp.zingohotels.com.localapp.Model.PackageDetails;
 import localapp.zingohotels.com.localapp.R;
 import localapp.zingohotels.com.localapp.Util.Util;
 
@@ -45,18 +51,38 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         ActivityModel activityModel = list.get(position);
 
-        if(activityModel.getActivityImages().size() != 0 && activityModel.getActivityImages().get(0) != null)
-        {
-            holder.mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+        Date date = new Date();
+        long todaymiliseconds = date.getTime();
+        try {
+            Date activitydate = new SimpleDateFormat("MM/dd/yyyy").parse(activityModel.getValidTo());
+
+            long activitymiliseconds = activitydate.getTime();
+            if(activitymiliseconds >= todaymiliseconds)
+            {
+                if(activityModel.getActivityImages().size() != 0 && activityModel.getActivityImages().get(0) != null)
+                {
+                    holder.mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+                }
+
+       /* holder.activity_discount.setText(activityModel.getDiscountPercentage()+" %");
+        holder.mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
+        holder.top_event_selling_price.setText("₹ "+activityModel.getSellingPrice());*/
+                holder.top_event_name.setText(activityModel.getActivityName());
+                holder.top_event_place.setText(activityModel.getAddress());
+                holder.top_no_of_sellings.setVisibility(View.GONE);
+                holder.no_of_units_left.setText("30 tickets left");
+                ArrayList<PackageDetails> activityPackages = activityModel.getPackageDetails();
+                if(activityPackages != null && activityPackages.size() != 0) {
+                    Collections.sort(activityPackages, new SortPackageDetails());
+                    holder.activity_discount.setText(activityPackages.get(0).getDiscount()+" %");
+                    holder.mDisplayPrice.setText("₹ "+activityPackages.get(0).getDeclaredRate()+"");
+                    holder.top_event_selling_price.setText("₹ "+activityPackages.get(0).getSellRate());
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        holder.activity_discount.setText(activityModel.getDiscountPercentage()+" %");
-        holder.mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
-        holder.top_event_selling_price.setText("₹ "+activityModel.getSellingPrice());
-        holder.top_event_name.setText(activityModel.getActivityName());
-        holder.top_event_place.setText(activityModel.getAddress());
-                holder.top_no_of_sellings.setVisibility(View.GONE);
-        holder.no_of_units_left.setText("30 tickets left");
                /* holder
         holder*/
     }

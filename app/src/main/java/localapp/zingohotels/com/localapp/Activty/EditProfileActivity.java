@@ -351,7 +351,10 @@ public class EditProfileActivity extends AppCompatActivity {
         mFullName.setText(userProfile.getFullName());
         mEmail.setText(userProfile.getEmail());
         mMobileNumber.setText(userProfile.getPhoneNumber());
-        profileImage.setImageBitmap(Util.convertToBitMap(userProfile.getProfilePhoto()));
+        if(userProfile.getProfilePhoto() != null && !userProfile.getProfilePhoto().isEmpty())
+        {
+            profileImage.setImageBitmap(Util.convertToBitMap(userProfile.getProfilePhoto()));
+        }
 
     }
 

@@ -1,3 +1,218 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/sign_up"
+
+    android:focusableInTouchMode="true">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#8a000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/buttons"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="20dp">
+        <localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#ffffff"
+            app:fontName="arial" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2px"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="or you can"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2px"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+        <localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView
+            android:id="@+id/signBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="Create An Account"
+            android:textColor="#ffffff"
+            app:fontName="arial" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="43dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:alpha="50"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#ffffff"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <!--<EditText
+                android:id="@+id/login_emailid"
+                android:singleLine="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_border_light"
+                android:drawableLeft="@drawable/ic_user"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="Email/Username"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />-->
+        <localapp.zingohotels.com.localapp.CustomViews.CustomEditextTTF
+            android:id="@+id/login_emailid"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/test_background"
+            android:hint="Email/Username"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#afaeae"
+            app:editfontName="arial" />
+
+
+        <!--<EditText
+                android:id="@+id/login_password"
+                android:singleLine="true"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_border_light"
+                android:drawableLeft="@drawable/ic_password"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />-->
+        <localapp.zingohotels.com.localapp.CustomViews.CustomEditextTTF
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:background="@drawable/test_background"
+            android:hint="Password"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#afaeae"
+            app:editfontName="arial" />
+
+        <!--<View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#EEEEEE" />-->
+
+
+        <!--<Button
+                android:id="@+id/loginBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/custom_border"
+                android:padding="3dp"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />-->
+
+
+        <!--<Button
+                android:id="@+id/signBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/custom_border"
+                android:padding="3dp"
+                android:text="Create An Account"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />-->
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
+
+
+<!--
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -131,4 +346,4 @@
 
 
 
-</RelativeLayout>
+</RelativeLayout>-->

@@ -1,11 +1,15 @@
 package localapp.zingohotels.com.localapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +31,10 @@ public class InterestActivity extends AppCompatActivity {
 
     ImageView mCloseActivityImg;
     CustomGridView customGridView;
+    Button mInterest;
+
+
+    InterestAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +47,7 @@ public class InterestActivity extends AppCompatActivity {
         setTitle("Interest");
 
         customGridView = (CustomGridView) findViewById(R.id.interest_grid_view);
+        mInterest = (Button) findViewById(R.id.interest_continue_btn);
 
 
 
@@ -47,6 +56,38 @@ public class InterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InterestActivity.this.finish();
+            }
+        });
+
+        customGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+            }
+        });
+
+        mInterest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int i = adapter.getCount();
+                String selected = "";
+
+                for (int j=0;j<i;j++)
+                {
+                    //System.out.println();
+                    if(((LinearLayout)customGridView.getChildAt(j)).isActivated())
+                    {
+                        selected = selected+j+",";
+                    }
+                }
+
+                if(!selected.isEmpty())
+                {
+                    Intent intent = new Intent(InterestActivity.this,ListOfEventsActivity.class);
+                    intent.putExtra("InterestId",selected);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -82,7 +123,7 @@ public class InterestActivity extends AppCompatActivity {
 
                             if(response.body() != null && response.body().size() != 0)
                             {
-                                InterestAdapter adapter = new InterestAdapter(InterestActivity.this,response.body());
+                                adapter = new InterestAdapter(InterestActivity.this,response.body());
                                 customGridView.setAdapter(adapter);
                             }
                         }

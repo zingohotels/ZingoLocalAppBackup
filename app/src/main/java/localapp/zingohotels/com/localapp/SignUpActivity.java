@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import localapp.zingohotels.com.localapp.Login.IRegistrasionService;
 import localapp.zingohotels.com.localapp.Login.LoginActivity;
+import localapp.zingohotels.com.localapp.Login.LoginNew;
 import localapp.zingohotels.com.localapp.Model.Profile1;
 import localapp.zingohotels.com.localapp.Model.UserProfile;
 import localapp.zingohotels.com.localapp.Model.UserRole;
@@ -259,6 +260,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     PreferenceHandler.getInstance(SignUpActivity.this).setUserFullName(userProfile1.getFullName());
                                     PreferenceHandler.getInstance(SignUpActivity.this).setUserEmail(userProfile1.getEmail());
                                     PreferenceHandler.getInstance(SignUpActivity.this).setUserPhone(userProfile1.getPhoneNumber());
+                                    PreferenceHandler.getInstance(SignUpActivity.this).setUserPrefix(userProfile1.getPrefix());
+                                    PreferenceHandler.getInstance(SignUpActivity.this).setUserSex(userProfile1.getGender());
                                     Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
                                     /*intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

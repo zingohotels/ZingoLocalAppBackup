@@ -27,6 +27,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     String userProfilePassword;
     int userProfileid;
+    UserProfile userProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if(bundle != null)
         {
             userProfileid = (int) bundle.getInt("Profile_id");
-            userProfilePassword = (String) bundle.getString("Profile_Password");
+            getProfile(userProfileid);
+            //userProfilePassword = (String) bundle.getString("Profile_Password");
             /*if(userProfile != null)
             {
                 mFullName.setText(userProfile.getFullName());
@@ -86,16 +88,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mConfirmPassword.setError("Please Enter Confirm Password");
             mConfirmPassword.requestFocus();
         }
-        else if(newPassword.equals(cnewPassword))
+        else if(!newPassword.equals(cnewPassword))
         {
             mConfirmPassword.setError("Password and Confirm Password Should be same");
             mConfirmPassword.requestFocus();
         }
         else
         {
-            UserProfile profile = new UserProfile();
+            UserProfile profile = userProfile;
             profile.setPassword(newPassword);
-            //updateProfile(profile);
+            updateProfile(profile);
         }
     }
 
@@ -145,7 +147,55 @@ public class ChangePasswordActivity extends AppCompatActivity {
         });
     }
 
+    public void getProfile(final int id)
+    {
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Updating...");
+        dialog.show();
 
+        new ThreadExecuter().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                ProfileApi profileApi = Util.getClient().create(ProfileApi.class);
+                Call<UserProfile> res = profileApi.getProfileById(id);
+                res.enqueue(new Callback<UserProfile>() {
+                    @Override
+                    public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                        if(dialog != null)
+                        {
+                            dialog.dismiss();
+                        }
+                        if(response.code() == 204||response.code() == 200)
+                        {
+                            //Toast.makeText(ChangePasswordActivity.this,"Success",Toast.LENGTH_SHORT).show();
+                            //ChangePasswordActivity.this.finish();
+                            //mUserProfileImage.setEnabled(false);
+                            if(response.body() != null)
+                            {
+                                userProfile = response.body();
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(ChangePasswordActivity.this,response.message(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserProfile> call, Throwable t) {
+                        if(dialog != null)
+                        {
+                            dialog.dismiss();
+                        }
+                        Toast.makeText(ChangePasswordActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

@@ -160,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
+        <!--<android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -169,7 +169,43 @@
             android:theme="@style/ToolBarStyle"
             >
 
+        </android.support.v7.widget.Toolbar>-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/ToolBarStyle"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:text="Zingo Local"
+                    android:textColor="#818080"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:text="Be Local &amp; Explore the Unexplored"
+                    android:textColor="#818080"
+                    />
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#b4b4b4"
+            android:layout_marginBottom="10dp"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,8 +217,10 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/pager"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/white"
+                    android:layout_height="250dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="15dp"
+
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                 <TextView
                     android:layout_width="match_parent"
@@ -462,7 +500,7 @@
     <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height=""></LinearLayout>-->
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -507,7 +545,7 @@
                         android:textColor="@color/default_textcolor"
                         android:id="@+id/main_user_name"
                         />
-                    <!--<TextView
+                    &lt;!&ndash;<TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -516,7 +554,7 @@
                         android:layout_marginTop="2dp"
                         android:textColor="@color/default_textcolor"
                         android:id="@+id/main_hotel_place"
-                        />-->
+                        />&ndash;&gt;
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -539,7 +577,109 @@
 
 
         </LinearLayout>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginTop="50dp"
+        android:background="#ffffff">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#EE596C"
+                android:id="@+id/main_user_profile">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/icons_profile"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/close_navbar"
+
+                    android:scaleType="centerCrop"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="10dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Good Morning"
+                        android:textSize="12sp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/default_textcolor"
+                        android:id="@+id/main_greetings"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ms Aish"
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/default_textcolor"
+                        android:id="@+id/main_user_name"
+                        />
+                    <!--<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mr Jhon"
+                        android:padding="5dp"
+                        android:textSize="16sp"
+
+                        android:textColor="@color/default_textcolor"
+                        android:id="@+id/main_user_name"
+                        />-->
+                    <!--<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/default_textcolor"
+                        android:id="@+id/main_hotel_place"
+                        />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4.5 *"
+                        android:padding="5dp"
+                        android:textSize="12sp"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/default_textcolor"
+                        android:id="@+id/main_hotel_star_rating"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/navbar_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </ListView>
+
+
+        </LinearLayout>
     </LinearLayout>
-
-
 </android.support.v4.widget.DrawerLayout>

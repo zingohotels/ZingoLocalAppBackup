@@ -5,6 +5,8 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import java.util.Date;
 import localapp.zingohotels.com.localapp.ListOfEventsActivity;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
 import localapp.zingohotels.com.localapp.Model.Bookings;
+import localapp.zingohotels.com.localapp.Model.PackageDetails;
 import localapp.zingohotels.com.localapp.R;
 import localapp.zingohotels.com.localapp.Util.Constants;
 import localapp.zingohotels.com.localapp.Util.PreferenceHandler;
@@ -30,14 +33,16 @@ import localapp.zingohotels.com.localapp.Util.PreferenceHandler;
 public class ActivityBook extends AppCompatActivity {
 
     ImageView mAdultAdd,mAdultRem,mChildAdd,mChildRem;
-    TextView mChildCount,mAdultCount,mBookDate,mBookTime,mTotalBookingAmount,mBookingAdultPrice;
+    TextView mChildCount,mAdultCount,mBookDate,mBookTime,mTotalBookingAmount,mBookingAdultPrice,
+            mBookingChildPrice,mActivityName,mTotalAdultPrice,mTotalChildPrice;
     Button mNext;
 
 
     int childCount = 0,adultCount = 1;
-    int bookingAmount = 0;
+    int bookingAdultAmount = 0,bookingChildAmount = 0;
     ActivityModel activity;
     SimpleDateFormat simpleDateFormat;
+    PackageDetails packageDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +56,29 @@ public class ActivityBook extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             activity = (ActivityModel)bundle.getSerializable(Constants.ACTIVITY);
+            activity = (ActivityModel)bundle.getSerializable(Constants.ACTIVIT_BOOKING);
+            packageDetails = (PackageDetails)bundle.getSerializable(Constants.ACTIVIT_PACKAGE);
         }
 
         mAdultAdd = (ImageView)findViewById(R.id.adult_add);
         mAdultRem = (ImageView)findViewById(R.id.adult_remove);
-        mChildAdd = (ImageView)findViewById(R.id.child_add);
+
+        //disbled in testng phase
+        /*mChildAdd = (ImageView)findViewById(R.id.child_add);
         mChildRem = (ImageView)findViewById(R.id.child_remove);
         mChildCount = (TextView)findViewById(R.id.book_child_count);
+        mBookingChildPrice = (TextView)findViewById(R.id.book_child_price);
+        mTotalChildPrice = (TextView)findViewById(R.id.book_child_amount);*/
+
         mAdultCount = (TextView)findViewById(R.id.book_adult_count);
         mBookDate = (TextView)findViewById(R.id.book_date);
         mBookTime = (TextView)findViewById(R.id.book_time);
         mBookingAdultPrice = (TextView)findViewById(R.id.booking_adult_price);
+
+        mTotalAdultPrice = (TextView)findViewById(R.id.book_adult_amount);
+
         mTotalBookingAmount = (TextView)findViewById(R.id.book_total_amount);
+        mActivityName = (TextView)findViewById(R.id.book_activity_name);
         mNext = (Button) findViewById(R.id.next_btn);
 
         //bookingAmount = Integer.parseInt(mTotalBookingAmount.getText().toString().replace("₹","").trim());
@@ -73,7 +89,7 @@ public class ActivityBook extends AppCompatActivity {
                 if(adultCount<10){
                     mAdultCount.setText((adultCount+1)+"");
                     adultCount++;
-                    mTotalBookingAmount.setText("₹ "+(bookingAmount*adultCount)+"");
+                    mTotalAdultPrice.setText("₹ "+(bookingAdultAmount*adultCount)+"");
                 }else{
                     Toast.makeText(ActivityBook.this,"You can only add 10 adults per booking",Toast.LENGTH_LONG).show();
                 }
@@ -88,7 +104,7 @@ public class ActivityBook extends AppCompatActivity {
                 if(adultCount>1){
                     mAdultCount.setText((adultCount-1)+"");
                     adultCount--;
-                    mTotalBookingAmount.setText("₹ "+(bookingAmount*adultCount)+"");
+                    mTotalAdultPrice.setText("₹ "+(bookingAdultAmount*adultCount)+"");
                 }else{
                     Toast.makeText(ActivityBook.this,"One adult is minimum for booking",Toast.LENGTH_LONG).show();
                 }
@@ -97,6 +113,98 @@ public class ActivityBook extends AppCompatActivity {
             }
         });
 
+        //Disabled in testing phase
+        /*mChildAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // int adult = Integer.parseInt(mAdultCount.getText().toString());
+                if(childCount<10){
+                    mChildCount.setText((childCount+1)+"");
+                    childCount++;
+                    mTotalChildPrice.setText("₹ "+(bookingChildAmount*childCount)+"");
+                }else{
+                    Toast.makeText(ActivityBook.this,"You can only add 10 childs per booking",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        mChildRem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // int adult = Integer.parseInt(mAdultCount.getText().toString());
+                if(childCount > 0){
+                    mChildCount.setText((childCount-1)+"");
+                    childCount--;
+
+                    mTotalChildPrice.setText("₹ "+(bookingChildAmount*childCount)+"");
+                }else{
+                    //Toast.makeText(ActivityBook.this,"One adult is minimum for booking",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });*/
+
+        mTotalAdultPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //System.out.println("adult Changing");
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String adultprice = mTotalAdultPrice.getText().toString().replace("₹ ","").trim();
+                if(!adultprice.isEmpty())
+                {
+                    int aprice = Integer.parseInt(adultprice);
+                    mTotalBookingAmount.setText("₹ "+(aprice));
+                    //Disable in testing phase
+                    /*String childPrice = mTotalChildPrice.getText().toString().replace("₹ ","").trim();
+                    if(!childPrice.isEmpty())
+                    {
+                        int cPrice = Integer.parseInt(childPrice);
+                        int tprice = aprice+cPrice;
+                        mTotalBookingAmount.setText("₹ "+(tprice));
+                    }*/
+                }
+            }
+        });
+        //disabled in testing phase
+        /*mTotalChildPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                System.out.println("child Changing");//mTotalAdultPrice adultprice aprice
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String childPrice = mTotalChildPrice.getText().toString().replace("₹ ","").trim();
+                if(!childPrice.isEmpty())
+                {
+                    int cPrice = Integer.parseInt(childPrice);
+                    String adultprice = mTotalAdultPrice.getText().toString().replace("₹ ","").trim();
+                    if(!adultprice.isEmpty())
+                    {
+                        int aprice = Integer.parseInt(adultprice);
+                        int tprice = aprice+cPrice;
+                        mTotalBookingAmount.setText("₹ "+tprice);
+                    }
+                }
+            }
+        });*/
 
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,9 +232,27 @@ public class ActivityBook extends AppCompatActivity {
 
         if(activity != null)
         {
-            mTotalBookingAmount.setText("₹ "+activity.getSellingPrice());
-            mBookingAdultPrice.setText("₹ "+activity.getSellingPrice());
-            bookingAmount = activity.getSellingPrice();
+            mActivityName.setText(activity.getActivityName());
+            if(packageDetails != null)
+            {
+                mTotalBookingAmount.setText("₹ "+packageDetails.getSellRate());
+                mBookingAdultPrice.setText("₹ "+packageDetails.getSellRate());
+                mTotalAdultPrice.setText("₹ "+packageDetails.getSellRate());
+                //mBookingChildPrice.setText("₹ "+packageDetails.getSellRateForChild());
+                //mTotalChildPrice.setText("₹ "+0);
+                bookingAdultAmount = packageDetails.getSellRate();
+                bookingChildAmount = packageDetails.getSellRateForChild();
+            }
+            else if(activity.getPackageDetails().get(0) != null)
+            {
+                mTotalBookingAmount.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
+                mBookingAdultPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
+                mTotalAdultPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
+                //mBookingChildPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRateForChild());
+                //mTotalChildPrice.setText("₹ "+0);
+                bookingAdultAmount = activity.getPackageDetails().get(0).getSellRate();
+                bookingChildAmount = activity.getPackageDetails().get(0).getSellRateForChild();
+            }
         }
     }
 
@@ -156,15 +282,31 @@ public class ActivityBook extends AppCompatActivity {
             bookings.setTravellerId(PreferenceHandler.getInstance(ActivityBook.this).getUserId());
             bookings.setTotalAmount(Integer.parseInt(mTotalBookingAmount.getText().toString().replace("₹ ","").trim()));
             bookings.setNoOfAdults(Integer.parseInt(mAdultCount.getText().toString()));
-            bookings.setActivities(activity);
-            bookings.setSellRate(activity.getSellingPrice());
-            bookings.setDiscount((int)activity.getDiscountPercentage());
-            bookings.setDiscountAmount(Integer.parseInt(mAdultCount.getText().toString()) * activity.getDiscountPrice());
+            //bookings.setActivities(activity);
+            if(packageDetails != null)
+            {
+                bookings.setSellRate(packageDetails.getSellRate());
+                bookings.setDeclaredRate(packageDetails.getDeclaredRate());
+                bookings.setDiscount((int)packageDetails.getDiscount());
+                bookings.setDiscountAmount(Integer.parseInt(mAdultCount.getText().toString()) * packageDetails.getDiscountAmount());
+                bookings.setDeclaredRateForChild(packageDetails.getDeclaredRateForChild());
+                bookings.setSellRateForChild(packageDetails.getSellRateForChild());
+            }
+            else if(activity.getPackageDetails().get(0) != null)
+            {
+                bookings.setSellRate(activity.getPackageDetails().get(0).getSellRate());
+                bookings.setDeclaredRate(activity.getPackageDetails().get(0).getDeclaredRate());
+                bookings.setDiscount((int)activity.getPackageDetails().get(0).getDiscount());
+                bookings.setDeclaredRateForChild(activity.getPackageDetails().get(0).getDeclaredRateForChild());
+                bookings.setSellRateForChild(activity.getPackageDetails().get(0).getSellRateForChild());
+                bookings.setDiscountAmount(Integer.parseInt(mAdultCount.getText().toString()) * activity.getPackageDetails().get(0).getDiscountAmount());
+            }
 
 
             Intent summary = new Intent(ActivityBook.this,BookingDetailsEnter.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constants.ACTIVITYBOOKING,bookings);
+            bundle.putSerializable(Constants.ACTIVITY,activity);
             summary.putExtras(bundle);
             startActivity(summary);
         }
@@ -203,7 +345,7 @@ public class ActivityBook extends AppCompatActivity {
 
                                 from = simpleDateFormat.format(fdate);
                                // to = simpleDateFormat.format(tdate);
-
+                                getAvailablity(from);
                                 System.out.println("To = "+from);
                                 tv.setText(from);
                                 //mTo.setText(to);
@@ -232,6 +374,12 @@ public class ActivityBook extends AppCompatActivity {
 
 
         datePickerDialog.show();
+
+    }
+
+    private void getAvailablity(String from) {
+
+
 
     }
 

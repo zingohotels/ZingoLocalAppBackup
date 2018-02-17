@@ -37,6 +37,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,9 @@ import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 
 import localapp.zingohotels.com.localapp.Activty.SlideMain;
 import localapp.zingohotels.com.localapp.Adapters.EventListAdapter;
@@ -55,6 +58,7 @@ import localapp.zingohotels.com.localapp.Adapters.ViewPagerAdapter;
 import localapp.zingohotels.com.localapp.Login.LoginWithActivity;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
 import localapp.zingohotels.com.localapp.Model.Category;
+import localapp.zingohotels.com.localapp.Model.NavBarItems;
 import localapp.zingohotels.com.localapp.Model.PagerModel;
 import localapp.zingohotels.com.localapp.Util.PreferenceHandler;
 import localapp.zingohotels.com.localapp.Util.ThreadExecuter;
@@ -76,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
     ViewPager vpPager,mtop_activities_viewpager;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
-    TextView mPickInterest,moreCategories,mFirstCategory,mSecondCategory,mThirdCategory,mMoreCategory,mUserName;
+    TextView mPickInterest,moreCategories,mFirstCategory,mSecondCategory,mThirdCategory,mMoreCategory,mUserName,mGreetings;
     ImageView mFirstBanner,mSecondBanner,mThirdBanner,mMoreBanner;
     DrawerLayout drawer;
     ListView navbar;
     FrameLayout mFirstBannerFrame,mSecondBannerFrame,mThirdBannerFrame,mMoreBannerFrame;
+    LinearLayout mUserBrifeProfile;
 
 
     ArrayList<Category> categories;
@@ -127,12 +132,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         vpPager = (ViewPager) findViewById(R.id.pager);
+        vpPager.setClipToPadding(false);
+        vpPager.setPageMargin(15);
+
         mtop_activities_viewpager = (ViewPager) findViewById(R.id.top_activities_viewpager);
         mtop_activities_viewpager.setClipToPadding(false);
         mtop_activities_viewpager.setPageMargin(12);
 
         mPickInterest = (TextView) findViewById(R.id.interest);
         mUserName = (TextView) findViewById(R.id.main_user_name);
+        mGreetings = (TextView) findViewById(R.id.main_greetings);
+        getTimeFromAndroid();
         mUserName.setText(PreferenceHandler.getInstance(MainActivity.this).getUserFullName());
         //moreCategories = (TextView) findViewById(R.id.more_category);
         mFirstCategory = (TextView) findViewById(R.id.first_banner_category_name);
@@ -150,6 +160,14 @@ public class MainActivity extends AppCompatActivity {
         mThirdBannerFrame = (FrameLayout) findViewById(R.id.third_banner_category_frame);
         mMoreBannerFrame = (FrameLayout) findViewById(R.id.more_banner_category_frame);
 
+        mUserBrifeProfile = (LinearLayout) findViewById(R.id.main_user_profile);
+        mUserBrifeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         mFirstBannerFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +230,28 @@ public class MainActivity extends AppCompatActivity {
         //vpPager.setOn
     }
 
+    private void getTimeFromAndroid() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int min = c.get(Calendar.MINUTE);
+
+        if(hours>=1 && hours<=12){
+            Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
+            mGreetings.setText("Good Morning");
+        }else if(hours>=12 && hours<=16){
+            Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
+            mGreetings.setText("Good Afternoon");
+        }else if(hours>=16 && hours<=21){
+            mGreetings.setText("Good Evening");
+            Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
+        }else if(hours>=21 && hours<=24){
+            mGreetings.setText("Good Night");
+            Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void setup() {
 
        /* String[] categories = getResources().getStringArray(R.array.categories);
@@ -234,27 +274,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpNavigationDrawerforOwner() {
 
-        //TypedArray icons = getResources().obtainTypedArray(R.array.navnar_item_images);
+        TypedArray icons = getResources().obtainTypedArray(R.array.navnar_item_images);
         String[] title  = getResources().getStringArray(R.array.navbar_items);
 
-        //ArrayList<NavBarItems> navBarItemsList = new ArrayList<>();
+        final ArrayList<NavBarItems> navBarItemsList = new ArrayList<>();
 
-        /*for (int i=0;i<title.length;i++)
+        for (int i=0;i<title.length;i++)
         {
             NavBarItems navbarItem = new NavBarItems(title[i],icons.getResourceId(i, -1));
             navBarItemsList.add(navbarItem);
-        }*/
-        final ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(title));
+        }
+        //final ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(title));
+        NavigationListAdapter adapter = new NavigationListAdapter(getApplicationContext(),navBarItemsList);
+        navbar.setAdapter(adapter);
         navbar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                displayView(arrayList.get(position));
+                displayView(navBarItemsList.get(position).getTitle());
             }
         });
-
-        NavigationListAdapter adapter = new NavigationListAdapter(getApplicationContext(),arrayList);
-        navbar.setAdapter(adapter);
-
 
     }
 
@@ -456,9 +494,10 @@ public class MainActivity extends AppCompatActivity {
             case "Share App":
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Get rewards by sharing Zingo Local App");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.send_to));
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                //startActivity(sendIntent);
+                startActivity(Intent.createChooser(sendIntent,"Zingo Local" ));
                 break;
 
             case "About Zingo":

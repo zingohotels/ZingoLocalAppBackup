@@ -16,6 +16,7 @@ import localapp.zingohotels.com.localapp.Adapters.EventListAdapter;
 import localapp.zingohotels.com.localapp.Adapters.TopActivitiesAdapter;
 import localapp.zingohotels.com.localapp.CustomInterfaces.RecyclerTouchListener;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
+import localapp.zingohotels.com.localapp.Model.InterestId;
 import localapp.zingohotels.com.localapp.Util.Constants;
 import localapp.zingohotels.com.localapp.Util.ThreadExecuter;
 import localapp.zingohotels.com.localapp.Util.Util;
@@ -51,6 +52,15 @@ public class ListOfEventsActivity extends AppCompatActivity {
                     getActivities(id);
                 }
             }
+            String interestid = getIntent().getStringExtra("InterestId");
+            System.out.println("InterestId = "+interestid);
+            if(interestid != null)
+            {
+                String[] interest = interestid.split(",");
+                InterestId interestId = new InterestId();
+                interestId.setZingoInterestId(Integer.parseInt(interest[0]));
+                getActivitiesByInterest(interestId);
+            }
         }
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(ListOfEventsActivity.this, recyclerView, new RecyclerTouchListener.ClickListener() {
@@ -71,7 +81,7 @@ public class ListOfEventsActivity extends AppCompatActivity {
 
     }
 
-   /* public void getActivities()
+    public void getActivitiesByInterest(final InterestId interestId)
     {
         final ProgressDialog dialog = new ProgressDialog(ListOfEventsActivity.this);
         dialog.setCancelable(false);
@@ -82,11 +92,12 @@ public class ListOfEventsActivity extends AppCompatActivity {
             public void run() {
                 //System.out.println(TAG+" thread started");
                 final ActivityApi activityApi = Util.getClient().create(ActivityApi.class);
-                Call<ArrayList<ActivityModel>> getCat = activityApi.getActivities();
+
+                Call<ArrayList<ActivityModel>> getCat = activityApi.getActivityByInterest(interestId);
 
                 getCat.enqueue(new Callback<ArrayList<ActivityModel>>() {
                     //@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    *//*@SuppressLint("NewApi")*//*
+                   // @SuppressLint("NewApi")
                     //System.out.println("thread inside on response");
                     @Override
                     public void onResponse(Call<ArrayList<ActivityModel>> call, Response<ArrayList<ActivityModel>> response) {
@@ -121,7 +132,7 @@ public class ListOfEventsActivity extends AppCompatActivity {
             }
 
         });
-    }*/
+    }
 
     public void getActivities(final int id)
     {

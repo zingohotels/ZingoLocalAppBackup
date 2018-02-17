@@ -18,6 +18,7 @@ import com.dd.processbutton.FlatButton;
 
 import java.util.ArrayList;
 
+import localapp.zingohotels.com.localapp.CustomViews.CustomFontTextView;
 import localapp.zingohotels.com.localapp.MainActivity;
 import localapp.zingohotels.com.localapp.Model.Profile1;
 import localapp.zingohotels.com.localapp.Model.UserProfile;
@@ -40,7 +41,7 @@ import retrofit2.Response;
 public class LoginNew extends AppCompatActivity {
 
     private EditText login_email,login_pwd;
-    private Button login,signup;
+    private CustomFontTextView login,signup;
     private ProgressDialog progressDialog;
 
     @Override
@@ -48,6 +49,11 @@ public class LoginNew extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        /*getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);*/
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().setSoftInputMode(
@@ -60,8 +66,8 @@ public class LoginNew extends AppCompatActivity {
 
         login_email = (EditText) findViewById(R.id.login_emailid);
         login_pwd = (EditText) findViewById(R.id.login_password);
-        login = (Button) findViewById(R.id.loginBtn);
-        signup = (Button) findViewById(R.id.signBtn);
+        login = (CustomFontTextView) findViewById(R.id.loginBtn);
+        signup = (CustomFontTextView) findViewById(R.id.signBtn);
 
     }
 
@@ -139,6 +145,8 @@ public class LoginNew extends AppCompatActivity {
                                 PreferenceHandler.getInstance(LoginNew.this).setUserFullName(dto.getFullName());
                                 PreferenceHandler.getInstance(LoginNew.this).setUserEmail(dto.getEmail());
                                 PreferenceHandler.getInstance(LoginNew.this).setUserPhone(dto.getPhoneNumber());
+                                PreferenceHandler.getInstance(LoginNew.this).setUserPrefix(dto.getPrefix());
+                                PreferenceHandler.getInstance(LoginNew.this).setUserSex(dto.getGender());
                                 /*SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(LoginNew.this);
                                 SharedPreferences.Editor spe = sp.edit();
                                 System.out.println("User id"+dto.getProfileId());

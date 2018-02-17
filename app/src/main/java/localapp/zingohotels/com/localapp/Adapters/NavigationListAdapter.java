@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import localapp.zingohotels.com.localapp.Model.NavBarItems;
 import localapp.zingohotels.com.localapp.R;
 
 /**
@@ -19,9 +20,9 @@ import localapp.zingohotels.com.localapp.R;
 public class NavigationListAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<String> mList = new ArrayList<>();
+    private ArrayList<NavBarItems> mList ;
 
-    public NavigationListAdapter(Context context, ArrayList<String> mList)
+    public NavigationListAdapter(Context context, ArrayList<NavBarItems> mList)
     {
         this.context = context;
         this.mList = mList;
@@ -52,10 +53,10 @@ public class NavigationListAdapter extends BaseAdapter {
         }
 
         TextView mTitle = (TextView) view.findViewById(R.id.title);
-        //ImageView mIcon = (ImageView) view.findViewById(R.id.icon);
+        ImageView mIcon = (ImageView) view.findViewById(R.id.icon);
 
-        mTitle.setText(mList.get(pos));//.getTitle().toString());
-        //mIcon.setImageResource(mList.get(pos).getIcon());
+        mTitle.setText(mList.get(pos).getTitle());//.getTitle().toString());
+        mIcon.setImageResource(mList.get(pos).getIcon());
         return view;
     }
 }

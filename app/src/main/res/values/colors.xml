@@ -3,13 +3,16 @@
     <!--<color name="colorPrimary">#EF5350</color>
     <color name="colorPrimaryDark">#F44336</color>-->
     <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimaryDark">#43A047</color>
+    <!--<color name="colorPrimaryDark">#43A047</color>-->
+    <color name="colorPrimaryDark">#b4b3b3</color>
     <color name="colorPrimary">#66BB6A</color>
+    <!--<color name="colorPrimary">#ffffff</color>-->
 
     <color name="black">#000000</color>
     <color name="normal">#ffffff</color>
     <color name="white">#ffffff</color>
     <color name="transparentBlack">#5e000000</color>
     <color name="default_textcolor">#ffffff</color>
+    <color name="pink">#EE596C</color>
     <!--<color name="transperant">@android:color/transparent</color>-->
 </resources>

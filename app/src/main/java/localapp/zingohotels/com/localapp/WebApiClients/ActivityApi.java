@@ -3,9 +3,12 @@ package localapp.zingohotels.com.localapp.WebApiClients;
 import java.util.ArrayList;
 
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
+import localapp.zingohotels.com.localapp.Model.InterestId;
 import localapp.zingohotels.com.localapp.Util.API;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -24,4 +27,7 @@ public interface ActivityApi {
 
     @GET("GetActivitiesByCategoryId/{id}")
     Call<ArrayList<ActivityModel>> getActivityByCategoryId(@Path("id") int id);
+
+    @POST("GetActivitiesByInterestId")
+    Call<ArrayList<ActivityModel>> getActivityByInterest(@Body InterestId interestId);
 }

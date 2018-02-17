@@ -23,6 +23,8 @@
     <string name="sign_up_title">Join Us</string>
     <string name="sign_up_sub_title">Be Local and See the world from local eyes</string>
     <string name="interest">What do you want to do? \n Choose your interest.</string>
+    <string name="response_failure_message">Please check data connection</string>
+    <string name="child_note">Note: Free entry for below 6 years childern </string>
 
     <array name="banner_images">
         <item>@drawable/water_sports</item>
@@ -59,6 +61,8 @@
     <string name="mina">Mina_is_gone_3D</string>
     <string name="Yeysk">Yeysk</string>
     <string name="Maribel_Suit">Maribel_Suit</string>
+    <string name="arial">arial</string>
+    <string name="Mistral">Mistral</string>
 
     <array name="activity_image">
         <item>@drawable/nightlife</item>
@@ -68,10 +72,13 @@
         <item>@drawable/water_sports</item>
     </array>
 
-    <string name="about_activity">We are 100% italian foodlovers and co-founders of the company LovexFood in Lastra a Signa ,Florence.We’ve been cooking since childhood with our grandmothers, and our passion for Italian cuisine has only intensified over the years. We love to share Italian family wisdom with other food enthusiasts.</string>
+    <string name="about_activity">We are 100% italian foodlovers and co-founders of the company LovexFood in Lastra a Signa ,
+        Florence.We’ve been cooking since childhood with our grandmothers, and our passion for Italian cuisine has only intensified over the years. We love to share Italian family wisdom with other food enthusiasts.</string>
 
     <!--Error messages-->
     <string name="phone_number_error">Please Enter Valid Phone Number</string>
+    <string name="send_to">Hey! Take a look at "Zingo Local-Book Local Experiences &amp; Activities"
+        https://play.google.com/store/apps/details?id=localapp.zingohotels.com.localapp</string>
 
     <array name="navbar_items">
         <!--<item>Home</item>-->
@@ -81,6 +88,16 @@
         <item>About Zingo</item>
         <item>Logout</item>
     </array>
+    <array name="navnar_item_images">
+        <item>@drawable/profile_icon</item>
+        <item>@drawable/wallet_icon</item>
+        <item>@drawable/share_icon</item>
+        <item>@drawable/about_zingo_icon</item>
+        <item>@drawable/logout_icon</item>
 
+        <!--<item>@drawable/icons_room</item>-->
+
+
+    </array>
 
 </resources>

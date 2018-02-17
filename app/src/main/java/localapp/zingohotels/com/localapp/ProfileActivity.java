@@ -60,9 +60,9 @@ public class ProfileActivity extends AppCompatActivity {
         mEmail = (TextView) findViewById(R.id.email_id);
         mPhoneNumber = (TextView) findViewById(R.id.phone_number);
         mEditProfile = (LinearLayout) findViewById(R.id.edit_profile);
-        mShareApp = (TextView) findViewById(R.id.share_app);
+        //mShareApp = (TextView) findViewById(R.id.share_app);
         mUserProfileImage = (CircleImageView) findViewById(R.id.user_profile_photo);
-        mShareApp.setVisibility(View.GONE);
+        //mShareApp.setVisibility(View.GONE);
 
         mChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,20 +91,27 @@ public class ProfileActivity extends AppCompatActivity {
         mUserProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+                if(userProfile.getProfilePhoto() == null || userProfile.getProfilePhoto().isEmpty())
+                {
+                    selectImage();
+                }
+                else
+                {
+                    //selectImage();
+                }
             }
         });
-        mShareApp.setOnClickListener(new View.OnClickListener() {
+        /*mShareApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent sendIntent = new Intent();
+                *//*Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Get rewards by sharing Zingo Local App");
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);*/
+                startActivity(sendIntent);*//*
 
             }
-        });
+        });*/
         /*if(PreferenceHandler.getInstance(ProfileActivity.this).getUserId() != 0)
         {
             getProfile();

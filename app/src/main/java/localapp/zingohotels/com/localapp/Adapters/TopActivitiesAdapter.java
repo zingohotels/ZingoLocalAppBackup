@@ -86,26 +86,26 @@ public class TopActivitiesAdapter extends PagerAdapter {
             mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
         }
 
-        mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
+        //mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
         top_event_name.setText(activityModel.getActivityName()+"");
         top_event_place.setText(activityModel.getAddress()+"");
-        top_event_selling_price.setText("₹ "+activityModel.getSellingPrice()+"");
+        //top_event_selling_price.setText("₹ "+activityModel.getSellingPrice()+"");
         //mDisplayPrice.setText(activityModel.getDisplayPrice()+"");
         //mDisplayPrice.setText(activityModel.getDisplayPrice()+"");
-        /*double discount = ((activityModel.getDisplayPrice()- activityModel.getSellingPrice())/activityModel.getDisplayPrice())*100;
-        System.out.println("discount = "+discount);*/
+        //double discount = ((activityModel.getDisplayPrice()- activityModel.getSellingPrice())/activityModel.getDisplayPrice())*100;
+        //System.out.println("discount = "+discount);
         NumberFormat df = new DecimalFormat("##");
-        activity_discount.setText(df.format(activityModel.getDiscountPercentage())+"% Discunt");
+        //activity_discount.setText(df.format(activityModel.getDiscountPercentage())+"% Discunt");
         ratingBar.setRating((float) activityModel.getRatings());
 
         //mDisplayPrice.setBakgroundResource(R.drawable.text_striker);
-        /*mDisplayPrice.setPaintFlags(mDisplayPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);*/
+        mDisplayPrice.setPaintFlags(mDisplayPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        /*ImageView imageView = (ImageView) view.findViewById(R.id.category_banner);
+        ImageView imageView = (ImageView) view.findViewById(R.id.category_banner);
         TextView categoryName = (TextView) view.findViewById(R.id.banner_category_name);
         TextView noofexperience = (TextView) view.findViewById(R.id.no_of_experience);
 
-        imageView.setImageResource(bgImages.get(position).getImage());
+        /*imageView.setImageResource(interestsArrayList.get(position).get());
         categoryName.setText(bgImages.get(position).getCategoryName());
         noofexperience.setText(bgImages.get(position).getNoofExperience());
 

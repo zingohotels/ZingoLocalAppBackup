@@ -38,6 +38,8 @@ import java.util.TimerTask;
 import localapp.zingohotels.com.localapp.Adapters.ActivityAdapter;
 import localapp.zingohotels.com.localapp.Adapters.AutoScrollAdapter;
 import localapp.zingohotels.com.localapp.Adapters.PackageAdapter;
+import localapp.zingohotels.com.localapp.CustomImplementations.SortPackageDetails;
+import localapp.zingohotels.com.localapp.CustomInterfaces.RecyclerTouchListener;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
 import localapp.zingohotels.com.localapp.Model.PackageDetails;
 import localapp.zingohotels.com.localapp.R;
@@ -114,7 +116,17 @@ public class ActivityDetail extends AppCompatActivity {
         mapView = (MapView) findViewById(R.id.activity_details_activity_location);
         recyclerView = (RecyclerView) findViewById(R.id.package_details_recyclerview);
 
+        /*recyclerView.addOnItemTouchListener(new RecyclerTouchListener(ActivityDetail.this, recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                System.out.println("activityPackages = "+activityPackages.get(position).getName());
+            }
 
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));*/
 
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -283,8 +295,9 @@ public class ActivityDetail extends AppCompatActivity {
           double per = diff*100;
           System.out.println("per = "+per);
 
-          PackageAdapter adapter = new PackageAdapter(ActivityDetail.this,activityPackages);
+          PackageAdapter adapter = new PackageAdapter(ActivityDetail.this,activityList);
           recyclerView.setAdapter(adapter);
+          mLetsGo.setVisibility(View.GONE);
       }
 
       final Handler handler = new Handler();
@@ -337,7 +350,7 @@ public class ActivityDetail extends AppCompatActivity {
 
   }
 
-    class SortPackageDetails implements Comparator<PackageDetails>
+    /*class SortPackageDetails implements Comparator<PackageDetails>
     {
 
         @Override
@@ -355,7 +368,7 @@ public class ActivityDetail extends AppCompatActivity {
                 return -1;
             }
         }
-    }
+    }*/
 
 
     public void getMapDetails(final int id)

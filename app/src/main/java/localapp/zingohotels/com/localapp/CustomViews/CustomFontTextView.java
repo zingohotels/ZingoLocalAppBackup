@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import localapp.zingohotels.com.localapp.R;
 
@@ -51,8 +50,13 @@ public class CustomFontTextView extends AppCompatTextView {
                 fontName = R.string.mina;
                 break;
 
-            case 5:
-                fontName = R.string.Maribel_Suit;
+
+            case 6:
+                fontName= R.string.arial;
+                break;
+            case 7:
+                fontName= R.string.Mistral;
+                break;
             default:
                 fontName = R.string.ColonnaMT;
                 break;
