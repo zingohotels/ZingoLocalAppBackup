@@ -156,7 +156,7 @@
 
                     </LinearLayout>
 
-                    <!--<LinearLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -176,11 +176,11 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
                             android:gravity="right"
-                            android:text="1 Child"
+                            android:text="0 Child"
                             android:textColor="#455A64" />
 
 
-                    </LinearLayout>-->
+                    </LinearLayout>
                 </LinearLayout>
 
                 <View
@@ -195,17 +195,54 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="10dp">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginLeft="10dp"
+                               android:gravity="center_vertical"
+                               android:text="Adult Base price"
+                               android:textColor="#000000" />
+                           <TextView
+                               android:id="@+id/display_price"
+                               android:layout_width="fill_parent"
+                               android:layout_height="wrap_content"
+                               android:layout_marginRight="10dp"
+
+                               android:gravity="right|center_vertical"
+                               android:text="₹250"
+                               android:textColor="#455A64" />
+                       </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Base price"
-                            android:textColor="#000000" />
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical"
+                                android:text="Child Base price"
+                                android:textColor="#000000" />
+                            <TextView
+                                android:id="@+id/display_child_price"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+
+                                android:gravity="right|center_vertical"
+                                android:text="₹250"
+                                android:textColor="#455A64" />
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -218,7 +255,7 @@
 
                     </LinearLayout>
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/display_price"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -226,7 +263,7 @@
                         android:layout_marginTop="20dp"
                         android:gravity="right"
                         android:text="₹250"
-                        android:textColor="#455A64" />
+                        android:textColor="#455A64" />-->
 
 
                 </LinearLayout>

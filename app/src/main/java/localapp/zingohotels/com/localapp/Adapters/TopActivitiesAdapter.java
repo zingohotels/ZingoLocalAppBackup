@@ -16,8 +16,10 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import localapp.zingohotels.com.localapp.Activty.ActivityDetail;
+import localapp.zingohotels.com.localapp.CustomImplementations.SortPackageDetails;
 import localapp.zingohotels.com.localapp.ListOfEventsActivity;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
 import localapp.zingohotels.com.localapp.Model.Interests;
@@ -89,17 +91,28 @@ public class TopActivitiesAdapter extends PagerAdapter {
         //mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
         top_event_name.setText(activityModel.getActivityName()+"");
         top_event_place.setText(activityModel.getAddress()+"");
+
         //top_event_selling_price.setText("₹ "+activityModel.getSellingPrice()+"");
         //mDisplayPrice.setText(activityModel.getDisplayPrice()+"");
         //mDisplayPrice.setText(activityModel.getDisplayPrice()+"");
         //double discount = ((activityModel.getDisplayPrice()- activityModel.getSellingPrice())/activityModel.getDisplayPrice())*100;
         //System.out.println("discount = "+discount);
+        if(activityModel.getPackageDetails().size() != 0)
+        {
+            Collections.sort(activityModel.getPackageDetails(),new SortPackageDetails());
+            mDisplayPrice.setPaintFlags(mDisplayPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            mDisplayPrice.setText("₹ "+activityModel.getPackageDetails().get(0).getDeclaredRate());
+            top_event_selling_price.setText("₹ "+activityModel.getPackageDetails().get(0).getSellRate());
+            activity_discount.setText(activityModel.getPackageDetails().get(0).getDiscount()+" % Discount");
+
+        }
         NumberFormat df = new DecimalFormat("##");
         //activity_discount.setText(df.format(activityModel.getDiscountPercentage())+"% Discunt");
         ratingBar.setRating((float) activityModel.getRatings());
 
         //mDisplayPrice.setBakgroundResource(R.drawable.text_striker);
-        mDisplayPrice.setPaintFlags(mDisplayPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
 
         ImageView imageView = (ImageView) view.findViewById(R.id.category_banner);
         TextView categoryName = (TextView) view.findViewById(R.id.banner_category_name);

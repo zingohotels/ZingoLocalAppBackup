@@ -241,7 +241,7 @@ public class Bookings implements Serializable{
     @SerializedName("NoOfAdults")
     private int NoOfAdults;
     @SerializedName("profiles")
-    private Profile profiles;
+    private UserProfile profiles;
     @SerializedName("ProfileId")
     private int ProfileId;
     @SerializedName("activities")
@@ -262,6 +262,30 @@ public class Bookings implements Serializable{
     private int DiscountAmount;
     @SerializedName("TotalAmount")
     private int TotalAmount;
+
+    @SerializedName("NoOfChilds")
+    private int NoOfChilds;
+
+
+    @SerializedName("ActivitiesId")
+    private int ActivitiesId;
+
+    public void setActivitiesId(int activitiesId) {
+        ActivitiesId = activitiesId;
+    }
+
+    public int getActivitiesId() {
+        return ActivitiesId;
+    }
+
+    public int getNoOfChilds() {
+        return NoOfChilds;
+    }
+
+    public void setNoOfChilds(int noOfChilds) {
+        NoOfChilds = noOfChilds;
+    }
+
     @SerializedName("paymentList")
     private ArrayList<BookingPayment> paymentList;
 
@@ -301,7 +325,7 @@ public class Bookings implements Serializable{
         this.activities = activities;
     }
 
-    public void setProfiles(Profile profiles) {
+    public void setProfiles(UserProfile profiles) {
         this.profiles = profiles;
     }
 
@@ -397,7 +421,7 @@ public class Bookings implements Serializable{
         return DeclaredRate;
     }
 
-    public Profile getProfiles() {
+    public UserProfile getProfiles() {
         return profiles;
     }
 

@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="₹2500"
+
                 android:layout_gravity="center_vertical"
                 android:id="@+id/booking_adult_price"
                 android:textAllCaps="true"
@@ -211,7 +211,7 @@
 
     </LinearLayout>
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -219,9 +219,9 @@
             android:layout_marginTop="5dp"
             android:textSize="12dp"
             android:text="@string/child_note"
-            android:textColor="#512DA8"/>
+            android:textColor="#512DA8"/>-->
 
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
@@ -249,7 +249,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="₹1200"
+
                 android:id="@+id/book_child_price"
                 android:textAllCaps="true"
                 android:textColor="#000000"
@@ -262,13 +262,13 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <ImageView
-                android:id="@+id/child_add"
+                android:id="@+id/child_remove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:src="@drawable/ic_add"/>
+                android:src="@drawable/ic_remove"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -284,17 +284,18 @@
                 android:textSize="15dp" />
 
             <ImageView
-                android:id="@+id/child_remove"
+                android:id="@+id/child_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:src="@drawable/ic_remove"/>
+                android:src="@drawable/ic_add"/>
+
         </LinearLayout>
 
 
-    </LinearLayout>-->
+    </LinearLayout>
 
 
     <TextView
@@ -338,7 +339,7 @@
 
         </LinearLayout>
         <!--disabled for testing phase-->
-            <!--<LinearLayout
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -365,7 +366,7 @@
                 android:textColor="#512DA8"
                 android:textStyle="bold" />
 
-        </LinearLayout>-->
+        </LinearLayout>
             <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -389,7 +390,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:gravity="right"
-            android:text="₹2500"
+
             android:textSize="20dp"
             android:textColor="#512DA8"
             android:textStyle="bold" />

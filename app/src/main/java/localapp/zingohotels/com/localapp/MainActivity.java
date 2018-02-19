@@ -44,6 +44,8 @@ import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -164,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
         mUserBrifeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if(drawer.isDrawerOpen())
+                if(drawer != null)
+                    drawer.closeDrawer(START);
+
                 Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
                 startActivity(intent);
             }
@@ -174,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ListOfEventsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title",mFirstCategory.getText().toString());
+                bundle.putInt("cat_id",categories.get(0).getCategoriesId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -185,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ListOfEventsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title",mSecondCategory.getText().toString());
+                bundle.putInt("cat_id",categories.get(1).getCategoriesId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -196,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ListOfEventsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title",mThirdCategory.getText().toString());
+                bundle.putInt("cat_id",categories.get(2).getCategoriesId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -446,9 +455,31 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println(TAG+" thread inside on response");
                         if (response.code() == 200)
                         {
-                            System.out.println(response.body().size());
-                            TopActivitiesAdapter eventpagerAdapter = new TopActivitiesAdapter(MainActivity.this,response.body());//,pagerModelArrayList);
-                            mtop_activities_viewpager.setAdapter(eventpagerAdapter);
+                            try
+                            {
+                                System.out.println(response.body().size());
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                ArrayList<ActivityModel> selectedActivities = response.body();
+                                ArrayList<ActivityModel> ActivityArrayList = new ArrayList<>();
+                                for (int i=0;i<response.body().size();i++)
+                                {
+                                    Date activitydate = simpleDateFormat.parse(selectedActivities.get(i).getValidTo());
+                                    String stdate = simpleDateFormat.format(new Date());
+                                    Date tdate = simpleDateFormat.parse(stdate);
+                                    //long activitymiliseconds = activitydate.getTime();
+
+                                    if(activitydate.after(tdate) || activitydate.equals(tdate))
+                                    {
+                                        ActivityArrayList.add(selectedActivities.get(i));
+                                    }
+                                }
+                                TopActivitiesAdapter eventpagerAdapter = new TopActivitiesAdapter(MainActivity.this,ActivityArrayList);//,pagerModelArrayList);
+                                mtop_activities_viewpager.setAdapter(eventpagerAdapter);
+                            }
+                            catch (ParseException ex)
+                            {
+                                ex.printStackTrace();
+                            }
                         }
                     }
 

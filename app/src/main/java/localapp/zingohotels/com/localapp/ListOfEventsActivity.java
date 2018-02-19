@@ -9,7 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import localapp.zingohotels.com.localapp.Activty.ActivityDetail;
 import localapp.zingohotels.com.localapp.Adapters.EventListAdapter;
@@ -108,10 +111,34 @@ public class ListOfEventsActivity extends AppCompatActivity {
                         //System.out.println(TAG+" thread inside on response");
                         if (response.code() == 200 && response.body() != null && response.body().size() != 0)
                         {
-                            ActivityArrayList = response.body();
+                            //ActivityArrayList = response.body();
+                            ArrayList<ActivityModel> selectedActivities = response.body();
                             System.out.println(response.body().size());
-                            EventListAdapter adapter = new EventListAdapter(ListOfEventsActivity.this,response.body());
-                            recyclerView.setAdapter(adapter);
+                            try
+                            {
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                ActivityArrayList = new ArrayList<>();
+                                for (int i=0;i<response.body().size();i++)
+                                {
+                                    Date activitydate = simpleDateFormat.parse(selectedActivities.get(i).getValidTo());
+                                    String stdate = simpleDateFormat.format(new Date());
+                                    Date tdate = simpleDateFormat.parse(stdate);
+                                    //long activitymiliseconds = activitydate.getTime();
+
+                                    if(activitydate.after(tdate) || activitydate.equals(tdate))
+                                    {
+                                        ActivityArrayList.add(selectedActivities.get(i));
+                                    }
+                                }
+                                System.out.println(ActivityArrayList.size());
+                                EventListAdapter adapter = new EventListAdapter(ListOfEventsActivity.this,ActivityArrayList);
+                                recyclerView.setAdapter(adapter);
+                            }
+                            catch (ParseException ex)
+                            {
+                                ex.printStackTrace();
+                            }
                         }
                     }
 
@@ -160,7 +187,7 @@ public class ListOfEventsActivity extends AppCompatActivity {
                         //System.out.println(TAG+" thread inside on response");
                         if (response.code() == 200 && response.body() != null )
                         {
-                            ActivityArrayList = response.body();
+                            /*ActivityArrayList = response.body();
                             //System.out.println(response.body().size());
                             if(ActivityArrayList.size() != 0)
                             {
@@ -171,6 +198,38 @@ public class ListOfEventsActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(ListOfEventsActivity.this,"No activities found for this caegory",
                                         Toast.LENGTH_SHORT).show();
+                            }*/
+                           // ActivityArrayList = response.body();
+                            ArrayList<ActivityModel> selectedActivities = response.body();
+
+                            System.out.println(response.body().size());
+                            try
+                            {
+                                /*Date date = new Date();
+                                long todaymiliseconds = date.getTime();*/
+
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                ActivityArrayList = new ArrayList<>();
+                                for (int i=0;i<response.body().size();i++)
+                                {
+                                    Date activitydate = simpleDateFormat.parse(selectedActivities.get(i).getValidTo());
+                                    String stdate = simpleDateFormat.format(new Date());
+                                    Date tdate = simpleDateFormat.parse(stdate);
+                                    //long activitymiliseconds = activitydate.getTime();
+
+                                    if(activitydate.after(tdate) || activitydate.equals(tdate))
+                                    {
+                                        ActivityArrayList.add(selectedActivities.get(i));
+                                    }
+                                }
+                                System.out.println(selectedActivities.size());
+                                EventListAdapter adapter = new EventListAdapter(ListOfEventsActivity.this,ActivityArrayList);
+                                recyclerView.setAdapter(adapter);
+                            }
+                            catch (ParseException ex)
+                            {
+                                ex.printStackTrace();
                             }
                         }
                     }

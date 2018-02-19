@@ -91,14 +91,15 @@ public class ProfileActivity extends AppCompatActivity {
         mUserProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(userProfile.getProfilePhoto() == null || userProfile.getProfilePhoto().isEmpty())
+                /*if(userProfile.getProfilePhoto() == null || userProfile.getProfilePhoto().isEmpty())
                 {
-                    selectImage();
+
                 }
                 else
                 {
                     //selectImage();
-                }
+                }*/
+                selectImage();
             }
         });
         /*mShareApp.setOnClickListener(new View.OnClickListener() {
@@ -112,14 +113,14 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });*/
-        /*if(PreferenceHandler.getInstance(ProfileActivity.this).getUserId() != 0)
+        if(PreferenceHandler.getInstance(ProfileActivity.this).getUserId() != 0)
         {
             getProfile();
         }
         else
         {
             Toast.makeText(ProfileActivity.this,"Please Create Profile",Toast.LENGTH_SHORT).show();
-        }*/
+        }
 
     }
 
@@ -171,6 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
                         {
                             dialog.dismiss();
                         }
+                        System.out.println(t.getMessage());
                         Toast.makeText(ProfileActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -324,14 +326,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(PreferenceHandler.getInstance(ProfileActivity.this).getUserId() != 0)
-        {
-            getProfile();
-        }
-        else
-        {
-            Toast.makeText(ProfileActivity.this,"Please Create Profile",Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     @Override

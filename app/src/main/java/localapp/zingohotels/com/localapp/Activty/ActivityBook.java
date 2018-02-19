@@ -1,6 +1,7 @@
 package localapp.zingohotels.com.localapp.Activty;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -24,21 +25,27 @@ import java.util.Date;
 
 import localapp.zingohotels.com.localapp.ListOfEventsActivity;
 import localapp.zingohotels.com.localapp.Model.ActivityModel;
+import localapp.zingohotels.com.localapp.Model.Availablity;
 import localapp.zingohotels.com.localapp.Model.Bookings;
 import localapp.zingohotels.com.localapp.Model.PackageDetails;
 import localapp.zingohotels.com.localapp.R;
 import localapp.zingohotels.com.localapp.Util.Constants;
 import localapp.zingohotels.com.localapp.Util.PreferenceHandler;
+import localapp.zingohotels.com.localapp.Util.Util;
+import localapp.zingohotels.com.localapp.WebApiClients.BookingApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivityBook extends AppCompatActivity {
 
     ImageView mAdultAdd,mAdultRem,mChildAdd,mChildRem;
     TextView mChildCount,mAdultCount,mBookDate,mBookTime,mTotalBookingAmount,mBookingAdultPrice,
-            mBookingChildPrice,mActivityName,mTotalAdultPrice,mTotalChildPrice;
+            mBookingChildPrice,mActivityName,mTotalAdultPrice,mTotalChildPrice,mRemainingTickets;
     Button mNext;
 
 
-    int childCount = 0,adultCount = 1;
+    int childCount = 0,adultCount = 1,remainingtickets;
     int bookingAdultAmount = 0,bookingChildAmount = 0;
     ActivityModel activity;
     SimpleDateFormat simpleDateFormat;
@@ -51,7 +58,7 @@ public class ActivityBook extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        setTitle("Booking");
+        setTitle("Booking ");
 
         final Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
@@ -64,16 +71,17 @@ public class ActivityBook extends AppCompatActivity {
         mAdultRem = (ImageView)findViewById(R.id.adult_remove);
 
         //disbled in testng phase
-        /*mChildAdd = (ImageView)findViewById(R.id.child_add);
+        mChildAdd = (ImageView)findViewById(R.id.child_add);
         mChildRem = (ImageView)findViewById(R.id.child_remove);
         mChildCount = (TextView)findViewById(R.id.book_child_count);
         mBookingChildPrice = (TextView)findViewById(R.id.book_child_price);
-        mTotalChildPrice = (TextView)findViewById(R.id.book_child_amount);*/
+        mTotalChildPrice = (TextView)findViewById(R.id.book_child_amount);
 
         mAdultCount = (TextView)findViewById(R.id.book_adult_count);
         mBookDate = (TextView)findViewById(R.id.book_date);
         mBookTime = (TextView)findViewById(R.id.book_time);
         mBookingAdultPrice = (TextView)findViewById(R.id.booking_adult_price);
+        mRemainingTickets = (TextView)findViewById(R.id.book_ticket_remains);
 
         mTotalAdultPrice = (TextView)findViewById(R.id.book_adult_amount);
 
@@ -86,10 +94,17 @@ public class ActivityBook extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // int adult = Integer.parseInt(mAdultCount.getText().toString());
-                if(adultCount<10){
-                    mAdultCount.setText((adultCount+1)+"");
-                    adultCount++;
-                    mTotalAdultPrice.setText("₹ "+(bookingAdultAmount*adultCount)+"");
+                if(adultCount<10 ){
+                    if((remainingtickets >= adultCount))
+                    {
+                        mAdultCount.setText((adultCount+1)+"");
+                        ++adultCount;
+                        mTotalAdultPrice.setText("₹ "+(bookingAdultAmount*adultCount)+"");
+                    }
+                    else
+                    {
+                        Toast.makeText(ActivityBook.this,"You can not select more than available slots",Toast.LENGTH_LONG).show();
+                    }
                 }else{
                     Toast.makeText(ActivityBook.this,"You can only add 10 adults per booking",Toast.LENGTH_LONG).show();
                 }
@@ -103,7 +118,7 @@ public class ActivityBook extends AppCompatActivity {
                 // int adult = Integer.parseInt(mAdultCount.getText().toString());
                 if(adultCount>1){
                     mAdultCount.setText((adultCount-1)+"");
-                    adultCount--;
+                    --adultCount;
                     mTotalAdultPrice.setText("₹ "+(bookingAdultAmount*adultCount)+"");
                 }else{
                     Toast.makeText(ActivityBook.this,"One adult is minimum for booking",Toast.LENGTH_LONG).show();
@@ -114,14 +129,22 @@ public class ActivityBook extends AppCompatActivity {
         });
 
         //Disabled in testing phase
-        /*mChildAdd.setOnClickListener(new View.OnClickListener() {
+        mChildAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // int adult = Integer.parseInt(mAdultCount.getText().toString());
-                if(childCount<10){
-                    mChildCount.setText((childCount+1)+"");
-                    childCount++;
-                    mTotalChildPrice.setText("₹ "+(bookingChildAmount*childCount)+"");
+                if(childCount<10 ){
+                    if((remainingtickets >= childCount))
+                    {
+                        mChildCount.setText((childCount+1)+"");
+                        ++childCount;
+                        mTotalChildPrice.setText("₹ "+(bookingChildAmount*childCount)+"");
+                    }
+                    else
+                    {
+                        Toast.makeText(ActivityBook.this,"You can not select more than available slots",Toast.LENGTH_LONG).show();
+                    }
+
                 }else{
                     Toast.makeText(ActivityBook.this,"You can only add 10 childs per booking",Toast.LENGTH_LONG).show();
                 }
@@ -135,7 +158,7 @@ public class ActivityBook extends AppCompatActivity {
                 // int adult = Integer.parseInt(mAdultCount.getText().toString());
                 if(childCount > 0){
                     mChildCount.setText((childCount-1)+"");
-                    childCount--;
+                    --childCount;
 
                     mTotalChildPrice.setText("₹ "+(bookingChildAmount*childCount)+"");
                 }else{
@@ -144,7 +167,7 @@ public class ActivityBook extends AppCompatActivity {
 
 
             }
-        });*/
+        });
 
         mTotalAdultPrice.addTextChangedListener(new TextWatcher() {
             @Override
@@ -164,20 +187,20 @@ public class ActivityBook extends AppCompatActivity {
                 if(!adultprice.isEmpty())
                 {
                     int aprice = Integer.parseInt(adultprice);
-                    mTotalBookingAmount.setText("₹ "+(aprice));
+                    //mTotalBookingAmount.setText("₹ "+(aprice));
                     //Disable in testing phase
-                    /*String childPrice = mTotalChildPrice.getText().toString().replace("₹ ","").trim();
+                    String childPrice = mTotalChildPrice.getText().toString().replace("₹ ","").trim();
                     if(!childPrice.isEmpty())
                     {
                         int cPrice = Integer.parseInt(childPrice);
                         int tprice = aprice+cPrice;
                         mTotalBookingAmount.setText("₹ "+(tprice));
-                    }*/
+                    }
                 }
             }
         });
         //disabled in testing phase
-        /*mTotalChildPrice.addTextChangedListener(new TextWatcher() {
+        mTotalChildPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -204,7 +227,7 @@ public class ActivityBook extends AppCompatActivity {
                     }
                 }
             }
-        });*/
+        });
 
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,8 +261,8 @@ public class ActivityBook extends AppCompatActivity {
                 mTotalBookingAmount.setText("₹ "+packageDetails.getSellRate());
                 mBookingAdultPrice.setText("₹ "+packageDetails.getSellRate());
                 mTotalAdultPrice.setText("₹ "+packageDetails.getSellRate());
-                //mBookingChildPrice.setText("₹ "+packageDetails.getSellRateForChild());
-                //mTotalChildPrice.setText("₹ "+0);
+                mBookingChildPrice.setText("₹ "+packageDetails.getSellRateForChild());
+                mTotalChildPrice.setText("₹ "+0);
                 bookingAdultAmount = packageDetails.getSellRate();
                 bookingChildAmount = packageDetails.getSellRateForChild();
             }
@@ -248,8 +271,8 @@ public class ActivityBook extends AppCompatActivity {
                 mTotalBookingAmount.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
                 mBookingAdultPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
                 mTotalAdultPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
-                //mBookingChildPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRateForChild());
-                //mTotalChildPrice.setText("₹ "+0);
+                mBookingChildPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRateForChild());
+                mTotalChildPrice.setText("₹ "+0);
                 bookingAdultAmount = activity.getPackageDetails().get(0).getSellRate();
                 bookingChildAmount = activity.getPackageDetails().get(0).getSellRateForChild();
             }
@@ -282,6 +305,8 @@ public class ActivityBook extends AppCompatActivity {
             bookings.setTravellerId(PreferenceHandler.getInstance(ActivityBook.this).getUserId());
             bookings.setTotalAmount(Integer.parseInt(mTotalBookingAmount.getText().toString().replace("₹ ","").trim()));
             bookings.setNoOfAdults(Integer.parseInt(mAdultCount.getText().toString()));
+            bookings.setNoOfChilds(Integer.parseInt(mChildCount.getText().toString()));
+            bookings.setActivitiesId(activity.getActivitiesId());
             //bookings.setActivities(activity);
             if(packageDetails != null)
             {
@@ -335,6 +360,7 @@ public class ActivityBook extends AppCompatActivity {
                         //String date2 = (monthOfYear + 1)  + "/" + (dayOfMonth+1) + "/" + year;
 
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
 
 
                         if (tv.equals(mBookDate)){
@@ -344,8 +370,19 @@ public class ActivityBook extends AppCompatActivity {
                                // Date tdate = simpleDateFormat.parse(date2);
 
                                 from = simpleDateFormat.format(fdate);
+                                Date activityfdate = simpleDateFormat1.parse(activity.getValidFrom());
+                                Date activitytdate = simpleDateFormat1.parse(activity.getValidTo());
                                // to = simpleDateFormat.format(tdate);
-                                getAvailablity(from);
+                                //long sdate
+                                if(fdate.getTime() >= activityfdate.getTime() && fdate.getTime() <= activitytdate.getTime())
+                                {
+                                    getAvailablity(from);
+                                }
+                                else
+                                {
+                                    Toast.makeText(ActivityBook.this,"This activity is not available on this date. Please select another date",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                                 System.out.println("To = "+from);
                                 tv.setText(from);
                                 //mTo.setText(to);
@@ -379,6 +416,37 @@ public class ActivityBook extends AppCompatActivity {
 
     private void getAvailablity(String from) {
 
+        final ProgressDialog dialog = new ProgressDialog(ActivityBook.this);
+        dialog.setTitle("Please wait...");
+        dialog.show();
+
+        BookingApi bookingApi = Util.getClient().create(BookingApi.class);
+        Availablity availablity = new Availablity();
+        availablity.setActivitiesId(activity.getActivitiesId());
+        availablity.setActivityDate(from);
+        Call<Integer> getresponse = bookingApi.getAvailablity(availablity);
+        getresponse.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                if(response.code() == 200)
+                {
+                    remainingtickets = response.body();
+                    mRemainingTickets.setText(remainingtickets+" Slots are left");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                if(dialog != null)
+                {
+                    dialog.dismiss();
+                }
+            }
+        });
 
 
     }

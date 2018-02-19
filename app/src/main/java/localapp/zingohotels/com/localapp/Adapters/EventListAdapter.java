@@ -36,6 +36,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
         this.context = context;
         this.list = list;
+        System.out.println(list.size());
 
     }
 
@@ -53,12 +54,12 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
         Date date = new Date();
         long todaymiliseconds = date.getTime();
-        try {
-            Date activitydate = new SimpleDateFormat("MM/dd/yyyy").parse(activityModel.getValidTo());
+        /*try {
+            Date activitydate = new SimpleDateFormat("MM/dd/yyyy").parse(activityModel.getValidTo());*/
 
-            long activitymiliseconds = activitydate.getTime();
-            if(activitymiliseconds >= todaymiliseconds)
-            {
+            /*long activitymiliseconds = activitydate.getTime();
+            if(activitymiliseconds <= todaymiliseconds)
+            {*/
                 if(activityModel.getActivityImages().size() != 0 && activityModel.getActivityImages().get(0) != null)
                 {
                     holder.mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
@@ -74,14 +75,16 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 ArrayList<PackageDetails> activityPackages = activityModel.getPackageDetails();
                 if(activityPackages != null && activityPackages.size() != 0) {
                     Collections.sort(activityPackages, new SortPackageDetails());
-                    holder.activity_discount.setText(activityPackages.get(0).getDiscount()+" %");
+
+                        holder.activity_discount.setText(activityPackages.get(0).getDiscount()+" % Discount");
+
                     holder.mDisplayPrice.setText("₹ "+activityPackages.get(0).getDeclaredRate()+"");
                     holder.top_event_selling_price.setText("₹ "+activityPackages.get(0).getSellRate());
                 }
-            }
-        } catch (ParseException e) {
+            //}
+       /* } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
                /* holder
         holder*/

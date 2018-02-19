@@ -18,4 +18,5 @@ public class Constants {
     public static final String PACKAGE_DESCRIPTION = "package_description";
     public static final String ACTIVIT_BOOKING = "activity_booking";
     public static final String ACTIVIT_PACKAGE= "activity_package";
+    public static final String DETAIL_BOOKING= "booking_details";
 }
