@@ -247,17 +247,17 @@ public class MainActivity extends AppCompatActivity {
         int min = c.get(Calendar.MINUTE);
 
         if(hours>=1 && hours<=12){
-            Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Good Morning "+PreferenceHandler.getInstance(MainActivity.this).getUserFullName(), Toast.LENGTH_SHORT).show();
             mGreetings.setText("Good Morning");
         }else if(hours>=12 && hours<=16){
-            Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Good Afternoon "+PreferenceHandler.getInstance(MainActivity.this).getUserFullName(), Toast.LENGTH_SHORT).show();
             mGreetings.setText("Good Afternoon");
         }else if(hours>=16 && hours<=21){
             mGreetings.setText("Good Evening");
-            Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Good Evening "+PreferenceHandler.getInstance(MainActivity.this).getUserFullName(), Toast.LENGTH_SHORT).show();
         }else if(hours>=21 && hours<=24){
             mGreetings.setText("Good Night");
-            Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Good Night "+PreferenceHandler.getInstance(MainActivity.this).getUserFullName(), Toast.LENGTH_SHORT).show();
         }
     }
 

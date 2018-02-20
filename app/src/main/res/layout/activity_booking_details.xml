@@ -403,15 +403,28 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-            <Button
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Go To Home"
-                android:layout_margin="10dp"
-                android:id="@+id/go_to_home_button"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"
-                />
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Go To Home"
+                    android:layout_margin="10dp"
+                    android:id="@+id/go_to_home_button"
+                    android:background="@color/colorPrimary"
+                    android:textColor="#fff"
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Book Again"
+                    android:layout_margin="10dp"
+                    android:id="@+id/book_again_button"
+                    android:background="@color/colorPrimary"
+                    android:textColor="#fff"
+                    />
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

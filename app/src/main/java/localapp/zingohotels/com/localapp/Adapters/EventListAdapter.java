@@ -70,6 +70,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.top_event_selling_price.setText("₹ "+activityModel.getSellingPrice());*/
                 holder.top_event_name.setText(activityModel.getActivityName());
                 holder.top_event_place.setText(activityModel.getAddress());
+                holder.no_of_units_left.setText(activityModel.getAvailability()+" Slots left");
                 holder.top_no_of_sellings.setVisibility(View.GONE);
                 holder.no_of_units_left.setText("30 tickets left");
                 ArrayList<PackageDetails> activityPackages = activityModel.getPackageDetails();

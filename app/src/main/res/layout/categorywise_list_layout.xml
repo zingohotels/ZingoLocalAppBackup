@@ -41,13 +41,13 @@
                     android:paddingLeft="10dp"
                     android:id="@+id/no_of_sellings"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/discount_background"/>
+                    android:background="#b79b63f8"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0% discount"
                     android:id="@+id/activity_discount"
-                    android:background="@drawable/discount_background"
+                    android:background="#a4f07da8"
                     android:textSize="14dp"
                     android:textColor="#ffffff"
                     android:layout_gravity="bottom|right"/>

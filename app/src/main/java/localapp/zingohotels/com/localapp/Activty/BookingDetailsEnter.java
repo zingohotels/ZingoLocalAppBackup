@@ -186,6 +186,7 @@ public class BookingDetailsEnter extends AppCompatActivity implements PaymentRes
 
     @Override
     public void onPaymentSuccess(String s) {
+        Toast.makeText(BookingDetailsEnter.this,"Bookng done successfully",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(BookingDetailsEnter.this,BookingDetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.DETAIL_BOOKING,successbooking.getBookingId());
@@ -259,7 +260,7 @@ public class BookingDetailsEnter extends AppCompatActivity implements PaymentRes
                 {
                     if(response.body() != null)
                     {
-                        Toast.makeText(BookingDetailsEnter.this,"Bookng done successfully",Toast.LENGTH_SHORT).show();
+
                         BookingPayment bookingPayment = new BookingPayment();
                         bookingPayment.setPaymentName(orderid);
                         bookingPayment.setAmount(bookings.getTotalAmount());
@@ -280,6 +281,7 @@ public class BookingDetailsEnter extends AppCompatActivity implements PaymentRes
                         }
                         else if(mCashPay.isChecked())
                             {
+                                Toast.makeText(BookingDetailsEnter.this,"Bookng done successfully",Toast.LENGTH_SHORT).show();
                                 Intent bookedintent = new Intent(BookingDetailsEnter.this,BookingDetailsActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putInt(Constants.DETAIL_BOOKING,successbooking.getBookingId());

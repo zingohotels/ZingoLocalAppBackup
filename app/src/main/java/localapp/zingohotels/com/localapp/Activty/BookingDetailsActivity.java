@@ -44,7 +44,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     mBookedTravellerName,mBookedSellRate,mBookedDiscountAmount,mBookedDisplayRate,mBookedToatalAmount,mBookingTime;
     LinearLayout mBookingDateLinearLayout,mBookingTimeLinearLayout,mBookingInclusionLinearLayout;
     ImageView confirmImage;
-    Button mGotoHome;
+    Button mGotoHome,mBookAgain;
 
 
 
@@ -81,6 +81,9 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         confirmImage = (ImageView) findViewById(R.id.booking_confirmation_icon);
         mGotoHome = (Button) findViewById(R.id.go_to_home_button);
+        mBookAgain = (Button) findViewById(R.id.book_again_button);
+        mGotoHome.setVisibility(View.GONE);
+        mBookAgain.setVisibility(View.GONE);
 
         mBookingDateLinearLayout = (LinearLayout) findViewById(R.id.booked_date_linear_layout);
         mBookingTimeLinearLayout = (LinearLayout) findViewById(R.id.booked_time_linear_layout);
@@ -105,9 +108,17 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 BookingDetailsActivity.this.finish();
             }
         });
+
+        mBookAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BookingDetailsActivity.this.finish();
+            }
+        });
     }
 
     private void setFields(Bookings bookedbookings, ActivityModel activityModel, String status) {
+
         if(bookedbookings.getProfiles() != null)
         {
             UserProfile profile = bookedbookings.getProfiles();
@@ -125,7 +136,9 @@ public class BookingDetailsActivity extends AppCompatActivity {
             mCongratsMessage.setText("Congratulations! Your Booking is Confirmed");
             mVoucherText.setText("Please find your voucher attached with your registred email");
             mInvoiceText.setText("Invoice is sent to your registred email id");
+            mInvoiceText.setVisibility(View.GONE);
             mConfirmText.setText("Kindly note your booking is now confirmed. Your are not required to contact ZingoHotels to confirm further");
+            mGotoHome.setVisibility(View.VISIBLE);
         }
         else if(status.equalsIgnoreCase("Failed"))
         {
@@ -134,9 +147,10 @@ public class BookingDetailsActivity extends AppCompatActivity {
             mVoucherText.setVisibility(View.GONE);
             mInvoiceText.setVisibility(View.GONE);
             mConfirmText.setVisibility(View.GONE);
+            mBookAgain.setVisibility(View.VISIBLE);
         }
 
-        mBookingNumber.setText("Your Booking Number "+bookedbookings.getBookingNumber());
+        mBookingNumber.setText("Your Transaction Number is #"+bookedbookings.getBookingNumber());
         if(activityModel == null)
         {
             mBookedActivityName.setText(bookedbookings.getActivities().getActivityName());
@@ -292,10 +306,20 @@ public class BookingDetailsActivity extends AppCompatActivity {
         switch (id)
         {
             case android.R.id.home:
+               // BookingDetailsActivity.this.finish();
+                Intent intent = new Intent(BookingDetailsActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 BookingDetailsActivity.this.finish();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
