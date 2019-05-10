@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import localapp.zingohotels.com.localapp.ListOfEventsActivity;
@@ -70,13 +72,15 @@ public class ViewPagerAdapter extends PagerAdapter {
         noofexperience.setText(bgImages.get(position).getNoofExperience());*/
         //System.out.println("bgImages = "+bgImages.get(position).getCategoriesName());
 
-        if(bgImages.get(position).getCategoriesImage() != null && !bgImages.get(position).getCategoriesImage().isEmpty())
+       /* if(bgImages.get(position).getCategoriesImage() != null && !bgImages.get(position).getCategoriesImage().isEmpty())
         {
             byte[] imagebytes = Base64.decode(bgImages.get(position).getCategoriesImage(),Base64.DEFAULT);
             Bitmap catimage = BitmapFactory.decodeByteArray(imagebytes,0,imagebytes.length);
             imageView.setImageBitmap(catimage);
-        }
+        }*/
 
+        String img = bgImages.get(position).getCategoriesImage();
+        Picasso.with(context).load(img).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(imageView);
         categoryName.setText(bgImages.get(position).getCategoriesName());
 
         if(view != null)

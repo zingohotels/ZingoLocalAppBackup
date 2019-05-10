@@ -218,9 +218,11 @@ public class ListOfEventsActivity extends AppCompatActivity {
                                     Date tdate = simpleDateFormat.parse(stdate);
                                     //long activitymiliseconds = activitydate.getTime();
 
+                                    ActivityArrayList.add(selectedActivities.get(i));
+
                                     if(activitydate.after(tdate) || activitydate.equals(tdate))
                                     {
-                                        ActivityArrayList.add(selectedActivities.get(i));
+
                                     }
                                 }
                                 System.out.println(selectedActivities.size());

@@ -12,6 +12,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ import localapp.zingohotels.com.localapp.Util.Util;
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder> {
     private Context context;
     private ArrayList<ActivityModel> list;
+
+
     public EventListAdapter(Context context,ArrayList<ActivityModel> list) {
 
         this.context = context;
@@ -62,7 +66,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
             {*/
                 if(activityModel.getActivityImages().size() != 0 && activityModel.getActivityImages().get(0) != null)
                 {
-                    holder.mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+                    //holder.mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+                    String image = activityModel.getActivityImages().get(0).getImages();
+                    if(image != null) {
+                        Picasso.with(context).load(image).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(holder.mActivityImage);
+                    }
                 }
 
        /* holder.activity_discount.setText(activityModel.getDiscountPercentage()+" %");
@@ -97,7 +105,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder  {
+   public class ViewHolder extends RecyclerView.ViewHolder  {
 
 
         TextView mDisplayPrice,top_event_name,top_event_place,top_event_selling_price,no_of_units_left,

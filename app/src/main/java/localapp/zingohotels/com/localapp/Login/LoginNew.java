@@ -54,8 +54,10 @@ public class LoginNew extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);*/
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -81,8 +83,7 @@ public class LoginNew extends AppCompatActivity {
 //                startActivity(i);
 //                finish();
                 Util.hideSoftKeyboard(v,LoginNew.this);
-                if (!login_email.getText().toString().trim().isEmpty() &&
-                        !login_pwd.getText().toString().trim().isEmpty())
+                if (!login_email.getText().toString().trim().isEmpty() && !login_pwd.getText().toString().trim().isEmpty())
                     login(login_email.getText().toString(),login_pwd.getText().toString());
                 else Toast.makeText(LoginNew.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
 
@@ -119,12 +120,8 @@ public class LoginNew extends AppCompatActivity {
                 p.setEmail(username);
                 p.setPassword(password);
 
-
-
-                ProfileApi apiService =
-                        Util.getClient().create(ProfileApi.class);
+                ProfileApi apiService = Util.getClient().create(ProfileApi.class);
                 System.out.println(p);
-
 
                 Call<ArrayList<UserProfile>> call = apiService.signUpByEmailPwd(p);
 
@@ -137,7 +134,7 @@ public class LoginNew extends AppCompatActivity {
                             progressDialog.dismiss();
                         if (statusCode == 200 || statusCode == 201) {
 
-                            ArrayList<UserProfile> dto1 = response.body();//-------------------should not be list------------
+                            ArrayList<UserProfile> dto1 = response.body();
                             if (dto1!=null && dto1.size()!=0) {
                                 UserProfile dto = dto1.get(0);
 

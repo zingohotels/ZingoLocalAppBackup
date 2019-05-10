@@ -43,6 +43,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
+import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,9 +75,6 @@ import retrofit2.Response;
 import static android.support.v4.view.GravityCompat.START;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
     //ViewPager vpPager;
     String TAG = "MainActivity";
     ViewPager vpPager,mtop_activities_viewpager;
@@ -340,7 +338,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 if(categories.size() == 1)
                                 {
-                                    mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    //mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(0).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mFirstBanner);
                                     //mFirstCategory.setAlpha(0.8f);
                                     mFirstCategory.setText(categories.get(0).getCategoriesName());
                                     mSecondBannerFrame.setVisibility(View.GONE);
@@ -350,10 +349,13 @@ public class MainActivity extends AppCompatActivity {
                                 else if(categories.size()  == 2)
                                 {
 
-                                    mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                   // mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(0).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mFirstBanner);
+
                                     mFirstCategory.setText(categories.get(0).getCategoriesName());
 
-                                    mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                   // mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(1).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mSecondBanner);
                                     mSecondCategory.setText(categories.get(1).getCategoriesName());
                                     mThirdBannerFrame.setVisibility(View.GONE);
                                     mMoreBannerFrame.setVisibility(View.GONE);
@@ -361,26 +363,32 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else if(categories.size() == 3)
                                 {
-                                    mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    //mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(0).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mFirstBanner);
                                     mFirstCategory.setText(categories.get(0).getCategoriesName());
 
-                                    mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                    //mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(1).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mSecondBanner);
                                     mSecondCategory.setText(categories.get(1).getCategoriesName());
 
-                                    mThirdBanner.setImageBitmap(Util.convertToBitMap(categories.get(2).getCategoriesImage()));
+                                    //mThirdBanner.setImageBitmap(Util.convertToBitMap(categories.get(2).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(2).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mThirdBanner);
                                     mThirdCategory.setText(categories.get(2).getCategoriesName());
 
                                     mMoreBannerFrame.setVisibility(View.GONE);
                                 }
                                 else if(categories.size() > 3)
                                 {
-                                    mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                   // mFirstBanner.setImageBitmap(Util.convertToBitMap(categories.get(0).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(0).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mFirstBanner);
                                     mFirstCategory.setText(categories.get(0).getCategoriesName());
 
-                                    mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                    //mSecondBanner.setImageBitmap(Util.convertToBitMap(categories.get(1).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(1).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mSecondBanner);
                                     mSecondCategory.setText(categories.get(1).getCategoriesName());
 
-                                    mThirdBanner.setImageBitmap(Util.convertToBitMap(categories.get(2).getCategoriesImage()));
+                                    //mThirdBanner.setImageBitmap(Util.convertToBitMap(categories.get(2).getCategoriesImage()));
+                                    Picasso.with(getApplicationContext()).load(categories.get(2).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mThirdBanner);
                                     mThirdCategory.setText(categories.get(2).getCategoriesName());
 
                                     //mMoreBannerFrame.setVisibility(View.GONE);
@@ -467,10 +475,11 @@ public class MainActivity extends AppCompatActivity {
                                     String stdate = simpleDateFormat.format(new Date());
                                     Date tdate = simpleDateFormat.parse(stdate);
                                     //long activitymiliseconds = activitydate.getTime();
+                                    ActivityArrayList.add(selectedActivities.get(i));
 
                                     if(activitydate.after(tdate) || activitydate.equals(tdate))
                                     {
-                                        ActivityArrayList.add(selectedActivities.get(i));
+
                                     }
                                 }
                                 TopActivitiesAdapter eventpagerAdapter = new TopActivitiesAdapter(MainActivity.this,ActivityArrayList);//,pagerModelArrayList);
@@ -553,36 +562,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean checkPermission() {
-        if ((ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
-                &&(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if ((ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                 && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
                 && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)) {
-            if ((ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.SEND_SMS))
-                    && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
-                    && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                    && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE))
-                    && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CALL_PHONE))) {
+                ) {
+        if ((ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
+                && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                && (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE))) {
 
                 //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
                         new String[]{
-                                android.Manifest.permission.SEND_SMS,
                                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                                android.Manifest.permission.CALL_PHONE},
+                                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                                },
                         MY_PERMISSIONS_REQUEST_RESULT);
                 Log.d("checkPermission if","false");
 
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.SEND_SMS,
+                        new String[]{
                                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                                android.Manifest.permission.CALL_PHONE},
+                                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                                },
                         MY_PERMISSIONS_REQUEST_RESULT);
                 Log.d("checkPermission else","true");
 

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import localapp.zingohotels.com.localapp.R;
 import localapp.zingohotels.com.localapp.Util.Util;
@@ -56,7 +58,9 @@ public class ActivityAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.activity_image_adapter,container,false);
         ImageView actImage = (ImageView) view.findViewById(R.id.activity_image);
         String img = activityImages.get(position);
-        actImage.setImageBitmap(Util.convertToBitMap(img));
+        Picasso.with(context).load(img).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(actImage);
+
+        //actImage.setImageBitmap(Util.convertToBitMap(img));
         //ImageLoader.getInstance().displayImage("file://" + selectedImageList.get(position), selectedImage, options);
 
         container.addView(view);

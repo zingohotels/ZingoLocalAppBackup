@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import localapp.zingohotels.com.localapp.Model.Category;
@@ -41,7 +43,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.imageView.setImageBitmap(convertToBitmap(list.get(position).getCategoriesImage()));
+        //holder.imageView.setImageBitmap(convertToBitmap(list.get(position).getCategoriesImage()));
+        Picasso.with(context).load(list.get(position).getCategoriesImage()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(holder.imageView);
         holder.textView.setText(list.get(position).getCategoriesName());
     }
 

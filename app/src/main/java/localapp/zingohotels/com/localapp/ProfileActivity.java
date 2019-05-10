@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -189,7 +191,8 @@ public class ProfileActivity extends AppCompatActivity {
         mPhoneNumber.setText(body.getPhoneNumber());
         if(body.getProfilePhoto() != null && !body.getProfilePhoto().isEmpty())
         {
-            mUserProfileImage.setImageBitmap(Util.convertToBitMap(body.getProfilePhoto()));
+            //mUserProfileImage.setImageBitmap(Util.convertToBitMap(body.getProfilePhoto()));
+            Picasso.with(getApplicationContext()).load(body.getProfilePhoto()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mUserProfileImage);
             mUserProfileImage.setEnabled(false);
         }
     }

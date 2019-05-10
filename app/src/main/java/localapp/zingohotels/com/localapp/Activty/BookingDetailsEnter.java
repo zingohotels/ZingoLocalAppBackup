@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -144,12 +145,21 @@ public class BookingDetailsEnter extends AppCompatActivity implements PaymentRes
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, dd MMM");
-            mBookingDate.setText(simpleDateFormat.format(new SimpleDateFormat("MM/dd/yyyy").parse(bookings.getActivityDate())));
+            if(bookings.getActivityDate()!=null&&bookings.getActivityDate().contains("-")){
+                mBookingDate.setText(simpleDateFormat.format(new SimpleDateFormat("yyyy-MM-dd").parse(bookings.getActivityDate())));
+
+            }else if(bookings.getActivityDate()!=null){
+                mBookingDate.setText(simpleDateFormat.format(new SimpleDateFormat("MM/dd/yyyy").parse(bookings.getActivityDate())));
+
+            }
+
             mBookingTime.setText(bookings.getBookingTimeSlot());
             mPersonCount.setText(bookings.getNoOfAdults()+" Adults");
             mChildCount.setText(bookings.getNoOfChilds()+" Childs");
             if(activityModel.getActivityImages().size() != 0) {
-                mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+                //mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+                Picasso.with(getApplicationContext()).load((activityModel.getActivityImages().get(0).getImages())).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mActivityImage);
+
             }
             mDisplayPrice.setText("₹ "+bookings.getSellRate());
             mDisplayChildPrice.setText("₹ "+bookings.getSellRateForChild());

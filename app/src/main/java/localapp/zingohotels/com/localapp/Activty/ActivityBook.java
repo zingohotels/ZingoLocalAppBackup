@@ -63,7 +63,11 @@ public class ActivityBook extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             activity = (ActivityModel)bundle.getSerializable(Constants.ACTIVITY);
-            activity = (ActivityModel)bundle.getSerializable(Constants.ACTIVIT_BOOKING);
+
+            if(activity==null){
+                activity = (ActivityModel)bundle.getSerializable(Constants.ACTIVIT_BOOKING);
+            }
+
             packageDetails = (PackageDetails)bundle.getSerializable(Constants.ACTIVIT_PACKAGE);
         }
 
@@ -123,8 +127,6 @@ public class ActivityBook extends AppCompatActivity {
                 }else{
                     Toast.makeText(ActivityBook.this,"One adult is minimum for booking",Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
 
@@ -195,7 +197,11 @@ public class ActivityBook extends AppCompatActivity {
                         int cPrice = Integer.parseInt(childPrice);
                         int tprice = aprice+cPrice;
                         mTotalBookingAmount.setText("₹ "+(tprice));
+                    }else{
+                        mTotalBookingAmount.setText("₹ 0");
                     }
+                }else{
+                    mTotalBookingAmount.setText("₹ 0");
                 }
             }
         });
@@ -266,7 +272,7 @@ public class ActivityBook extends AppCompatActivity {
                 bookingAdultAmount = packageDetails.getSellRate();
                 bookingChildAmount = packageDetails.getSellRateForChild();
             }
-            else if(activity.getPackageDetails().get(0) != null)
+            else if(activity.getPackageDetails()!= null&&activity.getPackageDetails().size()!=0)
             {
                 mTotalBookingAmount.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
                 mBookingAdultPrice.setText("₹ "+activity.getPackageDetails().get(0).getSellRate());
@@ -275,6 +281,16 @@ public class ActivityBook extends AppCompatActivity {
                 mTotalChildPrice.setText("₹ "+0);
                 bookingAdultAmount = activity.getPackageDetails().get(0).getSellRate();
                 bookingChildAmount = activity.getPackageDetails().get(0).getSellRateForChild();
+            }else{
+
+                mTotalBookingAmount.setText("₹ 0");
+                mBookingAdultPrice.setText("₹ 0");
+                mTotalAdultPrice.setText("₹ 0");
+                mBookingChildPrice.setText("₹ 0");
+                mTotalChildPrice.setText("₹ 0");
+                bookingAdultAmount = 0;
+                bookingChildAmount = 0;
+
             }
         }
     }
@@ -317,7 +333,7 @@ public class ActivityBook extends AppCompatActivity {
                 bookings.setDeclaredRateForChild(packageDetails.getDeclaredRateForChild());
                 bookings.setSellRateForChild(packageDetails.getSellRateForChild());
             }
-            else if(activity.getPackageDetails().get(0) != null)
+            else if(activity.getPackageDetails()!= null && activity.getPackageDetails().size()!=0)
             {
                 bookings.setSellRate(activity.getPackageDetails().get(0).getSellRate());
                 bookings.setDeclaredRate(activity.getPackageDetails().get(0).getDeclaredRate());
@@ -359,22 +375,22 @@ public class ActivityBook extends AppCompatActivity {
                         String date1 = (monthOfYear + 1)  + "/" + dayOfMonth + "/" + year;
                         //String date2 = (monthOfYear + 1)  + "/" + (dayOfMonth+1) + "/" + year;
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
                         if (tv.equals(mBookDate)){
 
                             try {
-                                Date fdate = simpleDateFormat.parse(date1);
+                                Date fdate = simpleDateFormat1.parse(date1);
                                // Date tdate = simpleDateFormat.parse(date2);
 
                                 from = simpleDateFormat.format(fdate);
-                                Date activityfdate = simpleDateFormat1.parse(activity.getValidFrom());
-                                Date activitytdate = simpleDateFormat1.parse(activity.getValidTo());
-                               // to = simpleDateFormat.format(tdate);
+//                                Date activityfdate = simpleDateFormat1.parse(activity.getValidFrom());
+//                                Date activitytdate = simpleDateFormat1.parse(activity.getValidTo());
+//                               // to = simpleDateFormat.format(tdate);
                                 //long sdate
-                                if(fdate.getTime() >= activityfdate.getTime() && fdate.getTime() <= activitytdate.getTime())
+                               /* if(fdate.getTime() >= activityfdate.getTime() && fdate.getTime() <= activitytdate.getTime())
                                 {
                                     getAvailablity(from);
                                 }
@@ -382,7 +398,7 @@ public class ActivityBook extends AppCompatActivity {
                                 {
                                     Toast.makeText(ActivityBook.this,"This activity is not available on this date. Please select another date",
                                             Toast.LENGTH_SHORT).show();
-                                }
+                                }*/
                                 System.out.println("To = "+from);
                                 tv.setText(from);
                                 //mTo.setText(to);

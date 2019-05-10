@@ -4,11 +4,13 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -159,7 +161,10 @@ public class ActivityDetail extends AppCompatActivity {
                 mMap.getProjection().getVisibleRegion().latLngBounds.getCenter();
 
             //getMapDetails();
-                setActivty();
+                if(activityList!=null){
+                    setActivty();
+                }
+
 
             }
         });
@@ -255,13 +260,24 @@ public class ActivityDetail extends AppCompatActivity {
 
 
   private void setActivty(){
-      mAbout.setText(activityList.getAboutTheActivity());
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+          mAbout.setText(Html.fromHtml(activityList.getAboutTheActivity(), Html.FROM_HTML_MODE_COMPACT));
+      } else {
+          mAbout.setText(Html.fromHtml(activityList.getAboutTheActivity()));
+      }
+      //mAbout.setText(activityList.getAboutTheActivity());
       mCancel.setText(activityList.getFlexibleCancellationPolicy());
       mName.setText(activityList.getActivityName());
      /* mSell.setText("₹"+activityList.getSellingPrice());
       mDisplay.setText("₹"+activityList.getDisplayPrice());*/
       // mInterest.setText(list.get(0).getInterests());
-      mBreif.setText(activityList.getDescription());
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+          mBreif.setText(Html.fromHtml(activityList.getDescription(), Html.FROM_HTML_MODE_COMPACT));
+      } else {
+          mBreif.setText(Html.fromHtml(activityList.getDescription()));
+      }
+      //mBreif.setText(activityList.getDescription());
       //mLocation.setText(activityList.getLocation());
      /* mPercent.setText(""+activityList.getDiscountPercentage());*/
       //activityId=activityList.getActivitiesId();

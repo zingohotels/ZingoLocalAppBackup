@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -353,7 +355,9 @@ public class EditProfileActivity extends AppCompatActivity {
         mMobileNumber.setText(userProfile.getPhoneNumber());
         if(userProfile.getProfilePhoto() != null && !userProfile.getProfilePhoto().isEmpty())
         {
-            profileImage.setImageBitmap(Util.convertToBitMap(userProfile.getProfilePhoto()));
+            //profileImage.setImageBitmap(Util.convertToBitMap(userProfile.getProfilePhoto()));
+            Picasso.with(getApplicationContext()).load((userProfile.getProfilePhoto())).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(profileImage);
+
         }
 
     }

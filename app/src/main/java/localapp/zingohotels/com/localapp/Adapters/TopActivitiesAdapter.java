@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -85,7 +87,8 @@ public class TopActivitiesAdapter extends PagerAdapter {
 
         if(activityModel.getActivityImages().size() != 0 && activityModel.getActivityImages().get(0) != null)
         {
-            mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+            //mActivityImage.setImageBitmap(Util.convertToBitMap(activityModel.getActivityImages().get(0).getImages()));
+            Picasso.with(context).load(activityModel.getActivityImages().get(0).getImages()).placeholder(R.drawable.no_image).error(R.drawable.no_image).into(mActivityImage);
         }
 
         //mDisplayPrice.setText("₹ "+activityModel.getDisplayPrice()+"");
